@@ -1,9 +1,9 @@
-# MarketPlace Analytics — Maelys Marketplace
+# MarketPlace Analytics - Maelys Marketplace
 
 MVP de plateforme data pour **Maelys Marketplace** : ingestion automatique des données du backoffice,
 Data Warehouse en étoile, KPIs dans Metabase et détection d'anomalies commerciales.
 
-> Projet A — cahier des charges v3.0 · Stack : Airflow 3.1.8 · PostgreSQL 18 · MinIO · Metabase 0.59 · Prometheus/Grafana
+> Projet A - cahier des charges v3.0 · Stack : Airflow 3.1.8 · PostgreSQL 18 · MinIO · Metabase 0.59 · Prometheus/Grafana
 
 ---
 
