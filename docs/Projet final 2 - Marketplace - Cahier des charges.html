@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cahier des charges — Projet A : MarketPlace Analytics</title>
+    
+    
+    
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');:root{--color-primary:#20a7c9;--color-primary-dark:#1a8ba8;--color-primary-light:#e0f4f8;--color-primary-gradient:linear-gradient(135deg,#20a7c9 0%,#1a8ba8 100%);--color-accent:#ff7f44;--color-accent-light:#fff4ef;--color-success:#22c55e;--color-success-light:#dcfce7;--color-warning:#eab308;--color-warning-light:#fef9c3;--color-danger:#ef4444;--color-danger-light:#fee2e2;--color-info:#3b82f6;--color-info-light:#dbeafe;--gray-50:#fafafa;--gray-100:#f4f4f5;--gray-200:#e4e4e7;--gray-300:#d4d4d8;--gray-400:#a1a1aa;--gray-500:#71717a;--gray-600:#52525b;--gray-700:#3f3f46;--gray-800:#27272a;--gray-900:#18181b;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'JetBrains Mono','Fira Code','Consolas',monospace;--content-max-width:80%;--content-padding:2.5rem;--radius-sm:6px;--radius-md:10px;--radius-lg:16px;--radius-xl:20px;--shadow-sm:0 1px 2px rgba(0,0,0,0.04);--shadow-md:0 4px 12px rgba(0,0,0,0.08);--shadow-lg:0 8px 30px rgba(0,0,0,0.12);--shadow-card:0 2px 8px rgba(0,0,0,0.06),0 0 1px rgba(0,0,0,0.1)}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}body{font-family:var(--font-sans);font-size:1rem;line-height:1.75;color:var(--gray-800);background:linear-gradient(180deg,var(--gray-100) 0%,var(--gray-50) 100%);min-height:100vh;margin:0;padding:2.5rem 1rem}.markdown-body,article,main{max-width:var(--content-max-width);margin:0 auto;background:white;padding:var(--content-padding);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);border:1px solid var(--gray-200)}h1,h2,h3,h4,h5,h6{font-weight:600;line-height:1.3;color:var(--gray-900);margin-top:2.5rem;margin-bottom:1rem}h1{font-size:2.25rem;font-weight:700;margin-top:0;padding-bottom:1rem;border-bottom:none;position:relative;color:var(--gray-900)}h1::after{content:'';position:absolute;bottom:0;left:0;width:80px;height:4px;background:var(--color-primary-gradient);border-radius:2px}h2{font-size:1.5rem;margin-top:3rem;padding:1rem 1.25rem;background:var(--gray-50);border-left:4px solid var(--color-primary);border-radius:0 var(--radius-md) var(--radius-md) 0;color:var(--gray-800)}h3{font-size:1.25rem;color:var(--gray-800);display:flex;align-items:center;gap:0.5rem}h3::before{content:'';width:8px;height:8px;background:var(--color-primary);border-radius:50%;flex-shrink:0}h4{font-size:1.1rem;color:var(--gray-700);border-bottom:1px dashed var(--gray-300);padding-bottom:0.5rem}h5,h6{font-size:0.9rem;color:var(--gray-600);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}p{margin-bottom:1.25rem}strong,b{font-weight:600;color:var(--gray-900)}a{color:var(--color-primary);text-decoration:none;font-weight:500;transition:all 0.2s;border-bottom:1px solid transparent}a:hover{color:var(--color-primary-dark);border-bottom-color:var(--color-primary)}mark{background:linear-gradient(120deg,#fef08a 0%,#fde047 100%);padding:0.1em 0.4em;border-radius:4px}hr{border:none;height:1px;background:var(--gray-200);margin:3rem 0;position:relative}hr::before{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:white;color:var(--color-primary);padding:0 1rem;font-size:0.8rem}ul,ol{margin-bottom:1.25rem;padding-left:1.5rem}li{margin-bottom:0.5rem;position:relative}li > ul,li > ol{margin-top:0.5rem;margin-bottom:0}ul{list-style-type:none}ul > li::before{content:'▸';color:var(--color-primary);font-weight:bold;position:absolute;left:-1.25rem}ul ul > li::before{content:'○';font-size:0.7em}ol{list-style-type:decimal}img{display:block;max-width:100%;max-height:500px;height:auto;margin:2rem auto;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);border:1px solid var(--gray-200);transition:transform 0.2s,box-shadow 0.2s;object-fit:contain}img:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}img[src*="screenshot"],img[src*="superset.apache.org"]{max-height:400px;width:auto;object-fit:contain}img[src*="images/"]{max-height:450px;width:auto;object-fit:contain}h1 img,h2 img,h3 img,h4 img,h5 img,h6 img{display:inline-block;margin:0 0.5rem 0 0;vertical-align:middle;max-height:1.5em;border-radius:var(--radius-sm);box-shadow:none;border:none}td img,th img{display:inline-block;margin:0;vertical-align:middle;max-height:2em;border-radius:var(--radius-sm);box-shadow:none;border:none}figure{margin:2rem 0;text-align:center;background:var(--gray-50);padding:1.5rem;border-radius:var(--radius-lg);border:1px solid var(--gray-200)}figure img{margin:0 auto 1rem;box-shadow:none;border:none}figcaption{font-size:0.875rem;color:var(--gray-500);font-style:italic}code:not(pre code){font-family:var(--font-mono);font-size:0.85em;background:#fef3c7;color:#92400e;padding:0.2em 0.5em;border-radius:var(--radius-sm);font-weight:600;border:1px solid #fcd34d}pre code{background:transparent;color:inherit;padding:0;border:none;font-weight:inherit}pre{font-family:var(--font-mono);font-size:0.875rem;line-height:1.6;background:var(--gray-900);color:#e4e4e7;padding:1.5rem;border-radius:var(--radius-lg);overflow-x:auto;margin:1.5rem 0;box-shadow:var(--shadow-md);border:1px solid var(--gray-800);position:relative}pre::before{content:'';position:absolute;top:12px;left:16px;width:12px;height:12px;background:#ff5f56;border-radius:50%;box-shadow:20px 0 0 #ffbd2e,40px 0 0 #27ca40}pre code{background:transparent;color:inherit;padding:0;font-size:inherit;font-weight:normal}table{width:100%;border-collapse:separate;border-spacing:0;margin:1.5rem 0;font-size:0.9375rem;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--gray-200)}thead{background:var(--color-primary-gradient);color:white}th{font-weight:600;text-align:left;padding:1rem 1.25rem;font-size:0.8125rem;text-transform:uppercase;letter-spacing:0.05em}td{padding:0.875rem 1.25rem;border-bottom:1px solid var(--gray-100);vertical-align:top}tbody tr:last-child td{border-bottom:none}tbody tr:nth-child(even){background:var(--gray-50)}tbody tr{transition:background 0.15s}tbody tr:hover{background:var(--color-primary-light)}blockquote{margin:2rem 0;padding:1.5rem 1.5rem 1.5rem 2rem;border-left:4px solid var(--color-primary);background:linear-gradient(135deg,var(--gray-50) 0%,white 100%);border-radius:0 var(--radius-lg) var(--radius-lg) 0;color:var(--gray-700);box-shadow:var(--shadow-sm);font-style:italic;position:relative}blockquote::before{content:'"';position:absolute;top:-10px;left:15px;font-size:4rem;color:var(--color-primary);opacity:0.2;font-family:Georgia,serif;line-height:1}blockquote p:last-child{margin-bottom:0}details{margin:1.5rem 0;padding:0;background:white;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-card);transition:box-shadow 0.2s}details:hover{box-shadow:var(--shadow-md)}details[open]{box-shadow:var(--shadow-md);padding:1rem 1.25rem}details[open] > summary{margin:-1rem -1.25rem 1rem -1.25rem}details > .highlight,details > pre{margin-left:-1.25rem;margin-right:-1.25rem;border-radius:0}details > .highlight pre{border-radius:0;margin:0}details > .highlight:last-child,details > pre:last-child{margin-bottom:-1rem}summary{font-weight:600;cursor:pointer;padding:1rem 1.25rem;list-style:none;display:flex;align-items:center;gap:0.75rem;color:var(--gray-800);background:var(--gray-50);border-bottom:1px solid transparent;transition:all 0.2s}details[open] summary{border-bottom-color:var(--gray-200);background:var(--color-primary-light);color:var(--color-primary-dark)}summary::-webkit-details-marker{display:none}summary::before{content:'▶';font-size:0.65rem;color:var(--color-primary);transition:transform 0.2s;flex-shrink:0}details[open] summary::before{transform:rotate(90deg)}summary:hover{background:var(--gray-100)}.mermaid,pre.mermaid{background:white;padding:2rem;margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--gray-200);text-align:center;overflow-x:auto;box-shadow:var(--shadow-card)}.mermaid::before{display:none}.mermaid svg{max-width:100%;height:auto}.note,.info,.tip{padding:1.25rem;margin:1.5rem 0;border-radius:var(--radius-lg);border-left:4px solid var(--color-info);background:var(--color-info-light);box-shadow:var(--shadow-sm)}.warning,.attention{border-left-color:var(--color-warning);background:var(--color-warning-light)}.danger,.error{border-left-color:var(--color-danger);background:var(--color-danger-light)}.success{border-left-color:var(--color-success);background:var(--color-success-light)}h2 + p::first-letter{font-size:1.5em;font-weight:600;color:var(--color-primary);float:left;margin-right:0.1em;line-height:1}@media print{body{background:white;padding:0}.markdown-body,article,main{box-shadow:none;border:none;padding:0;max-width:100%}pre{background:var(--gray-100) !important;color:var(--gray-900) !important;box-shadow:none;border:1px solid var(--gray-300)}pre::before{display:none}a{color:var(--gray-900)}img{max-height:280px;page-break-inside:avoid;box-shadow:none}h1,h2,h3{page-break-after:avoid}table,pre,blockquote,details{page-break-inside:avoid}h2{background:none;padding-left:0}}@media (max-width:768px){body{padding:1rem 0.5rem}.markdown-body,article,main{padding:1.5rem;border-radius:var(--radius-lg)}h1{font-size:1.75rem}h2{font-size:1.25rem;padding:0.75rem 1rem}h3{font-size:1.1rem}table{display:block;overflow-x:auto}pre{padding:1rem;font-size:0.8rem}img{max-height:250px}blockquote::before{display:none}}img[src*="superset-logo"]{max-height:80px;margin:0 0 2rem 0;box-shadow:none;border:none}img[src*="superset-logo"]:hover{transform:none}.mermaid-wrapper{position:relative;display:inline-block;width:100%}.mermaid-expand-btn{position:absolute;top:12px;right:12px;width:36px;height:36px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.9);color:var(--gray-600);font-size:1.2rem;cursor:pointer;opacity:0;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-md);z-index:10}.mermaid-wrapper:hover .mermaid-expand-btn{opacity:1}.mermaid-expand-btn:hover{background:var(--color-primary);color:white;transform:scale(1.1)}.mermaid-lightbox{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;display:none}.mermaid-lightbox.active{display:flex;align-items:center;justify-content:center}.mermaid-lightbox-backdrop{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px)}.mermaid-lightbox-container{position:relative;width:100%;height:100%;overflow:hidden;cursor:grab;display:flex;align-items:center;justify-content:center}.mermaid-lightbox-content{transform-origin:center center;transition:transform 0.1s ease-out;padding:40px}.mermaid-lightbox-content svg{max-width:none !important;max-height:none !important;width:80vw !important;height:auto !important;min-width:800px;background:white;border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-lg)}.mermaid-lightbox.active svg{font-size:12px !important}.mermaid-lightbox.active svg text{white-space:nowrap !important}.mermaid-lightbox.active svg foreignObject{overflow:visible !important;text-align:left !important}.mermaid-lightbox.active svg foreignObject *{white-space:nowrap !important;overflow:visible !important;text-overflow:clip !important;width:auto !important;max-width:none !important;min-width:0 !important}.mermaid-lightbox-controls{position:absolute;top:20px;right:20px;display:flex;gap:8px;z-index:10001}.mermaid-lb-btn{width:44px;height:44px;border:none;border-radius:var(--radius-md);background:rgba(255,255,255,0.95);color:var(--gray-800);font-size:1.1rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s ease;box-shadow:var(--shadow-md)}.mermaid-lb-zoom-reset{width:auto;padding:0 16px;font-size:0.9rem}.mermaid-lb-btn:hover{background:var(--color-primary);color:white;transform:scale(1.05)}.mermaid-lb-close:hover{background:#ef4444;color:white}.mermaid-lightbox::after{content:'Molette:zoom • Glisser:déplacer • Échap:fermer';position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:0.85rem;font-weight:500;background:rgba(0,0,0,0.5);padding:10px 20px;border-radius:var(--radius-lg)}
+    </style>
+    
+    <style>
+.mermaid-container{background:white;border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;justify-content:center;align-items:center;overflow:auto;flex:1;min-height:120px;max-height:600px;max-width:100%;width:100%}.mermaid-container--full{flex:1;min-height:0}.mermaid-container--compact{min-height:100px;max-height:350px;flex:0 0 auto}.mermaid-container--small{max-height:300px}.mermaid-container--medium{max-height:450px}.mermaid-container--large{max-height:700px}.mermaid-container--contained{overflow:hidden}.mermaid-container--contained .mermaid svg{max-height:100% !important}.mermaid,pre.mermaid{font-family:var(--font-display,'Inter',sans-serif);width:100%;display:flex;justify-content:center;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin:16px 0;text-align:center;max-height:60vh;overflow:hidden}.mermaid::before,.mermaid::after{display:none}.mermaid svg{max-width:100%;max-height:60vh;height:auto;width:auto}.mermaid svg[aria-roledescription="gantt"]{max-width:none !important;width:100% !important;min-width:800px !important;max-height:none !important;height:auto !important;flex:1 1 auto !important}.mermaid:has(svg[aria-roledescription="gantt"]){display:block !important;max-height:none !important;overflow-x:auto !important;overflow-y:visible !important;min-width:0 !important}.mermaid-container--scroll{overflow:auto}.mermaid .node rect,.mermaid .node polygon,.mermaid .node circle{stroke-width:2px !important}.mermaid .edgePath .path{stroke-width:2px !important}.mermaid .label{font-family:var(--font-display) !important;font-size:12px !important;overflow:visible !important}.mermaid .nodeLabel{font-size:12px !important;line-height:1.3 !important;overflow:visible !important;white-space:normal !important;text-overflow:clip !important}.mermaid .edgeLabel{font-size:11px !important;overflow:visible !important}.mermaid .node rect,.mermaid .node polygon{overflow:visible !important}.mermaid .cluster rect,.mermaid svg .cluster rect{rx:8px !important;ry:8px !important}.mermaid .cluster-label{font-size:14px !important;font-weight:700 !important;dominant-baseline:text-before-edge !important}.mermaid .cluster-label foreignObject{overflow:visible !important}.mermaid .cluster-label foreignObject div,.mermaid .cluster-label foreignObject p,.mermaid .cluster-label foreignObject span{padding-bottom:8px !important;margin-bottom:4px !important;line-height:1.4 !important}.mermaid .cluster .nodeLabel{margin-top:4px !important}.mermaid .cluster rect{fill:#f8fafc !important;stroke:#cbd5e1 !important;stroke-width:2px !important}.mermaid .cluster-label text,.mermaid .cluster-label tspan,.mermaid svg .cluster-label text{fill:#1e293b !important;color:#1e293b !important;font-weight:700 !important}.mermaid .actor,.mermaid svg .actor,.mermaid svg rect.actor,.mermaid .actor-top,.mermaid .actor-bottom,.mermaid svg .actor-top,.mermaid svg .actor-bottom{fill:#1e3a5f !important;stroke:#0c4a6e !important;stroke-width:2px !important}.mermaid .actor-man,.mermaid text.actor,.mermaid svg text.actor,.mermaid svg .actor-man{fill:#ffffff !important;color:#ffffff !important;font-size:14px !important;font-weight:600 !important}.mermaid text.actor tspan,.mermaid svg text.actor tspan,.mermaid .actor-man tspan{fill:#ffffff !important;color:#ffffff !important}.mermaid .actor-line,.mermaid svg .actor-line,.mermaid svg line.actor-line{stroke:#64748b !important;stroke-width:1.5px !important;stroke-dasharray:4,4 !important}.mermaid .messageLine0,.mermaid .messageLine1,.mermaid svg .messageLine0,.mermaid svg .messageLine1,.mermaid svg line.messageLine0,.mermaid svg line.messageLine1{stroke:#1e293b !important;stroke-width:2px !important}.mermaid .arrowhead,.mermaid svg .arrowhead{fill:#1e293b !important;stroke:#1e293b !important}.mermaid #arrowhead path,.mermaid marker path,.mermaid svg marker path,.mermaid svg #arrowhead path{fill:#1e293b !important;stroke:#1e293b !important}.mermaid .messageText,.mermaid svg .messageText,.mermaid svg text.messageText{fill:#0f172a !important;color:#0f172a !important;font-size:13px !important;font-weight:600 !important;stroke:none !important}.mermaid .messageText tspan,.mermaid svg .messageText tspan{fill:#0f172a !important;color:#0f172a !important}.mermaid .activation0,.mermaid .activation1,.mermaid .activation2,.mermaid svg .activation0,.mermaid svg .activation1,.mermaid svg .activation2{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .loopLine,.mermaid svg .loopLine{stroke:#64748b !important;stroke-width:2px !important}.mermaid rect.loopBox,.mermaid .loopBox,.mermaid svg .loopBox{fill:#f8fafc !important;stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .loopText,.mermaid .loopText tspan,.mermaid svg .loopText,.mermaid svg .loopText tspan{fill:#1e293b !important;color:#1e293b !important;font-size:12px !important;font-weight:700 !important}.mermaid .labelBox,.mermaid svg .labelBox{fill:#dcfce7 !important;stroke:#22c55e !important;stroke-width:1.5px !important}.mermaid .labelText,.mermaid .labelText tspan,.mermaid svg .labelText,.mermaid svg .labelText tspan{fill:#14532d !important;color:#14532d !important;font-size:12px !important;font-weight:700 !important}.mermaid .note,.mermaid svg .note,.mermaid rect.note{fill:#fef9c3 !important;stroke:#ca8a04 !important;stroke-width:2px !important}.mermaid .noteText,.mermaid .noteText tspan,.mermaid svg .noteText,.mermaid svg .noteText tspan{fill:#713f12 !important;color:#713f12 !important;font-size:12px !important;font-weight:500 !important}.mermaid .sequenceNumber,.mermaid svg .sequenceNumber{fill:#ffffff !important;color:#ffffff !important}.mermaid .sequenceNumber-rect,.mermaid svg rect.sequenceNumber-rect{fill:#374151 !important;stroke:#1f2937 !important}.mermaid .er.entityBox,.mermaid .entityBox,.mermaid svg .er.entityBox,.mermaid svg .entityBox,.mermaid svg rect.er{fill:#dbeafe !important;stroke:#3b82f6 !important;stroke-width:2px !important}.mermaid .er.entityLabel,.mermaid .entityLabel,.mermaid svg .er.entityLabel,.mermaid svg .entityLabel,.mermaid svg text.er{fill:#1e3a8a !important;color:#1e3a8a !important;font-weight:600 !important}.mermaid .er.attributeBoxEven,.mermaid svg .er.attributeBoxEven{fill:#f8fafc !important;stroke:#cbd5e1 !important}.mermaid .er.attributeBoxOdd,.mermaid svg .er.attributeBoxOdd{fill:#f1f5f9 !important;stroke:#cbd5e1 !important}.mermaid .er text,.mermaid svg g.er text,.mermaid svg .erDiagram text{fill:#1e293b !important;color:#1e293b !important}.mermaid .er.relationshipLine,.mermaid svg .er.relationshipLine{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid .er.relationshipLabel,.mermaid svg .er.relationshipLabel{fill:#475569 !important}.mermaid .mindmap-node rect,.mermaid .mindmap-node circle,.mermaid .mindmap-node ellipse,.mermaid .mindmap-node polygon,.mermaid svg .mindmap-node rect,.mermaid svg .mindmap-node circle,.mermaid svg .mindmap-node ellipse{stroke-width:2px !important}.mermaid .mindmap-node:nth-child(7n+1) rect,.mermaid .mindmap-node:nth-child(7n+1) circle,.mermaid .mindmap-node:nth-child(7n+1) ellipse{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .mindmap-node:nth-child(7n+1) text,.mermaid .mindmap-node:nth-child(7n+1) .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .mindmap-node:nth-child(7n+2) rect,.mermaid .mindmap-node:nth-child(7n+2) circle,.mermaid .mindmap-node:nth-child(7n+2) ellipse{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .mindmap-node:nth-child(7n+2) text,.mermaid .mindmap-node:nth-child(7n+2) .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .mindmap-node:nth-child(7n+3) rect,.mermaid .mindmap-node:nth-child(7n+3) circle,.mermaid .mindmap-node:nth-child(7n+3) ellipse{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .mindmap-node:nth-child(7n+3) text,.mermaid .mindmap-node:nth-child(7n+3) .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .mindmap-node:nth-child(7n+4) rect,.mermaid .mindmap-node:nth-child(7n+4) circle,.mermaid .mindmap-node:nth-child(7n+4) ellipse{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .mindmap-node:nth-child(7n+4) text,.mermaid .mindmap-node:nth-child(7n+4) .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .mindmap-node:nth-child(7n+5) rect,.mermaid .mindmap-node:nth-child(7n+5) circle,.mermaid .mindmap-node:nth-child(7n+5) ellipse{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .mindmap-node:nth-child(7n+5) text,.mermaid .mindmap-node:nth-child(7n+5) .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .mindmap-node:nth-child(7n+6) rect,.mermaid .mindmap-node:nth-child(7n+6) circle,.mermaid .mindmap-node:nth-child(7n+6) ellipse{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .mindmap-node:nth-child(7n+6) text,.mermaid .mindmap-node:nth-child(7n+6) .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .mindmap-node:nth-child(7n) rect,.mermaid .mindmap-node:nth-child(7n) circle,.mermaid .mindmap-node:nth-child(7n) ellipse{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .mindmap-node:nth-child(7n) text,.mermaid .mindmap-node:nth-child(7n) .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .mindmap text,.mermaid svg [class*="mindmap"] text{font-weight:500 !important}.mermaid .mindmap-edge,.mermaid svg .mindmap-edge{stroke:#64748b !important;stroke-width:1.5px !important}.mermaid[data-processed="true"]{min-height:0 !important}.diagram{background:var(--color-gray-50);border:2px dashed var(--color-gray-300);border-radius:var(--radius-lg);padding:var(--space-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:150px;flex:1}.diagram--placeholder{background:linear-gradient(135deg,var(--color-gray-50) 0%,var(--color-gray-100) 100%)}.diagram .icon{font-size:48px;margin-bottom:var(--space-sm);opacity:0.6}.diagram .text{font-size:14px;color:var(--color-gray-500);font-weight:500}.arch-diagram{display:flex;flex-direction:column;gap:var(--space-md);width:100%}.arch-layer{display:flex;gap:var(--space-sm);justify-content:center}.arch-box{background:var(--color-gray-100);border:2px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-sm) var(--space-md);font-size:12px;font-weight:500;color:var(--color-gray-700);text-align:center;min-width:100px}.arch-box--primary{background:rgba(14,165,233,0.15);border-color:var(--color-primary);color:var(--color-primary-dark)}.arch-box--accent{background:rgba(249,115,22,0.15);border-color:var(--color-accent);color:#c2410c}.arch-box--success{background:rgba(16,185,129,0.15);border-color:var(--color-success);color:#047857}.arch-box--info{background:rgba(99,102,241,0.15);border-color:var(--color-info);color:#4338ca}.arch-box--dark{background:var(--color-gray-800);border-color:var(--color-gray-700);color:white}.arch-connector{display:flex;justify-content:center;color:var(--color-gray-400);font-size:20px}.flow{display:flex;align-items:center;gap:var(--space-sm);flex-wrap:wrap;justify-content:center}.flow__item{background:var(--color-gray-100);border:1px solid var(--color-gray-300);border-radius:var(--radius-md);padding:var(--space-xs) var(--space-md);font-size:13px;font-weight:500;color:var(--color-gray-700)}.flow__item--highlight{background:var(--color-primary);border-color:var(--color-primary);color:white}.flow__arrow{color:var(--color-gray-400);font-size:18px}.timeline{display:flex;gap:var(--space-lg);align-items:stretch}.timeline__item{flex:1;display:flex;flex-direction:column;position:relative}.timeline__item:not(:last-child)::after{content:'→';position:absolute;right:calc(var(--space-lg) / -2 - 8px);top:50%;transform:translateY(-50%);color:var(--color-gray-400);font-size:20px}.timeline__number{width:28px;height:28px;background:var(--color-primary);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:var(--space-sm)}.timeline__title{font-size:13px;font-weight:600;color:var(--color-gray-900);margin-bottom:var(--space-xs)}.timeline__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stat{text-align:center;padding:var(--space-md)}.stat__value{font-size:36px;font-weight:800;color:var(--color-primary);line-height:1}.stat__label{font-size:13px;color:var(--color-gray-600);margin-top:var(--space-xs)}.stat--small .stat__value{font-size:24px}.icon-box{width:48px;height:48px;min-width:48px;background:linear-gradient(135deg,var(--color-primary) 0%,var(--color-primary-dark) 100%);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;flex-shrink:0}.icon-box--sm{width:36px;height:36px;min-width:36px;font-size:18px}.icon-box--lg{width:64px;height:64px;min-width:64px;font-size:32px}.icon-box--accent{background:linear-gradient(135deg,var(--color-accent) 0%,#ea580c 100%)}.icon-box--success{background:linear-gradient(135deg,var(--color-success) 0%,#047857 100%)}.icon-box--info{background:linear-gradient(135deg,var(--color-info) 0%,#4338ca 100%)}.superset-logo{display:flex;align-items:center;gap:var(--space-md)}.superset-logo__icon{width:80px;height:80px}.superset-logo__icon svg{width:100%;height:100%}.superset-logo__text{font-size:32px;font-weight:700}.superset-logo__text span{color:var(--color-primary)}.comparison-table{font-size:12px}.comparison-table th{font-size:11px;padding:8px 10px}.comparison-table td{padding:6px 10px;vertical-align:middle}.comparison-table .product-name{font-weight:600;white-space:nowrap}.comparison-table .check{color:var(--color-success);font-weight:bold}.comparison-table .cross{color:var(--color-danger);font-weight:bold}.comparison-table .partial{color:var(--color-warning);font-weight:bold}.use-case{background:var(--color-gray-50);border:1px solid var(--color-gray-200);border-radius:var(--radius-lg);padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)}.use-case--positive{border-color:var(--color-success);border-left-width:4px}.use-case--negative{border-color:var(--color-danger);border-left-width:4px}.use-case__number{font-size:24px;font-weight:800;color:var(--color-gray-300)}.use-case__title{font-size:14px;font-weight:600;color:var(--color-gray-900)}.use-case__text{font-size:12px;color:var(--color-gray-600);line-height:1.4}.stack-layer{display:flex;align-items:center;gap:var(--space-md);padding:var(--space-sm) var(--space-md);background:var(--color-gray-50);border-radius:var(--radius-md);margin-bottom:var(--space-sm)}.stack-layer__label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--color-gray-500);width:100px;flex-shrink:0}.stack-layer__items{display:flex;gap:var(--space-xs);flex-wrap:wrap}.stack-layer__item{background:white;border:1px solid var(--color-gray-300);border-radius:var(--radius-sm);padding:4px 10px;font-size:12px;font-weight:500;color:var(--color-gray-700)}.stack-layer__item--highlight{background:var(--color-accent);border-color:var(--color-accent);color:white}.permission-matrix{font-size:12px}.permission-matrix th:first-child{text-align:left}.permission-matrix td:not(:first-child),.permission-matrix th:not(:first-child){text-align:center;width:80px}.permission-matrix .action{font-weight:500;text-align:left}.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md)}.source-group{display:flex;flex-direction:column;gap:var(--space-xs)}.source-group__title{font-size:13px;font-weight:600;color:var(--color-gray-900);padding-bottom:var(--space-xs);border-bottom:1px solid var(--color-gray-200);margin-bottom:var(--space-xs)}.source-link{font-size:12px;color:var(--color-primary);text-decoration:none;display:flex;align-items:center;gap:var(--space-xs)}.source-link:hover{text-decoration:underline}.source-link::before{content:'→';color:var(--color-gray-400)}@media print{.mermaid-container,.arch-diagram,.diagram{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;color-adjust:exact !important}.arch-box,.flow__item,.timeline__number,.icon-box,.stat__value{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}}.mermaid .node.pastel-blue rect,.mermaid .node.pastel-blue polygon{fill:#dbeafe !important;stroke:#3b82f6 !important}.mermaid .node.pastel-blue .nodeLabel{fill:#1e3a8a !important;color:#1e3a8a !important}.mermaid .node.pastel-green rect,.mermaid .node.pastel-green polygon{fill:#dcfce7 !important;stroke:#22c55e !important}.mermaid .node.pastel-green .nodeLabel{fill:#14532d !important;color:#14532d !important}.mermaid .node.pastel-yellow rect,.mermaid .node.pastel-yellow polygon{fill:#fef9c3 !important;stroke:#eab308 !important}.mermaid .node.pastel-yellow .nodeLabel{fill:#713f12 !important;color:#713f12 !important}.mermaid .node.pastel-orange rect,.mermaid .node.pastel-orange polygon{fill:#ffedd5 !important;stroke:#f97316 !important}.mermaid .node.pastel-orange .nodeLabel{fill:#7c2d12 !important;color:#7c2d12 !important}.mermaid .node.pastel-pink rect,.mermaid .node.pastel-pink polygon{fill:#fce7f3 !important;stroke:#ec4899 !important}.mermaid .node.pastel-pink .nodeLabel{fill:#831843 !important;color:#831843 !important}.mermaid .node.pastel-purple rect,.mermaid .node.pastel-purple polygon{fill:#f3e8ff !important;stroke:#a855f7 !important}.mermaid .node.pastel-purple .nodeLabel{fill:#581c87 !important;color:#581c87 !important}.mermaid .node.pastel-cyan rect,.mermaid .node.pastel-cyan polygon{fill:#cffafe !important;stroke:#06b6d4 !important}.mermaid .node.pastel-cyan .nodeLabel{fill:#164e63 !important;color:#164e63 !important}.mermaid .node.dark-blue rect,.mermaid .node.dark-blue polygon{fill:#1e3a5f !important;stroke:#0c4a6e !important}.mermaid .node.dark-blue .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-green rect,.mermaid .node.dark-green polygon{fill:#14532d !important;stroke:#166534 !important}.mermaid .node.dark-green .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-purple rect,.mermaid .node.dark-purple polygon{fill:#4c1d95 !important;stroke:#5b21b6 !important}.mermaid .node.dark-purple .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-gray rect,.mermaid .node.dark-gray polygon{fill:#374151 !important;stroke:#4b5563 !important}.mermaid .node.dark-gray .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid .node.dark-slate rect,.mermaid .node.dark-slate polygon{fill:#1e293b !important;stroke:#334155 !important}.mermaid .node.dark-slate .nodeLabel{fill:#ffffff !important;color:#ffffff !important}.mermaid g[style*="fill:#"] .nodeLabel,.mermaid g[style*="fill:#"] .nodeLabel{text-shadow:none !important}.mermaid [style*="fill:#f"][style*="fill:#f"] .nodeLabel,.mermaid [style*="fill:#e"][style*="fill:#e"] .nodeLabel,.mermaid [style*="fill:#d"][style*="fill:#d"] .nodeLabel,.mermaid [style*="fill:#c"][style*="fill:#c"] .nodeLabel,.mermaid [style*="fill:rgb(2"][style*="fill:rgb(2"] .nodeLabel{fill:#1e293b !important;color:#1e293b !important}img[src*="images/"]{max-width:100%;max-height:450px;width:auto;height:auto;object-fit:contain;display:block;margin:1.5rem auto}img[src*="screenshot"],img[src*="superset.apache.org"],img[src*="capture"]{max-width:100%;max-height:400px;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e4e4e7}.content-image,.screenshot{max-width:100%;max-height:500px;object-fit:contain}
+    </style>
+    
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'default',
+                    securityLevel: 'loose',
+                    flowchart: {
+                        useMaxWidth: false,
+                        htmlLabels: true
+                    },
+                    sequence: {
+                        useMaxWidth: false
+                    }
+                });
+            }
+        });
+    </script>
+    
+    
+    <script>
+const PASTEL_COLORS={blue:{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'}, green:{bg: '#dcfce7', border: '#22c55e', text: '#14532d'}, yellow:{bg: '#fef9c3', border: '#eab308', text: '#713f12'}, orange:{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}, pink:{bg: '#fce7f3', border: '#ec4899', text: '#831843'}, purple:{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'}, cyan:{bg: '#cffafe', border: '#06b6d4', text: '#164e63'}, gray:{bg: '#f4f4f5', border: '#71717a', text: '#27272a'}};const DARK_COLORS={blue:{bg: '#1e3a5f', border: '#0c4a6e', text: '#ffffff'}, green:{bg: '#14532d', border: '#166534', text: '#ffffff'}, purple:{bg: '#4c1d95', border: '#5b21b6', text: '#ffffff'}, gray:{bg: '#374151', border: '#4b5563', text: '#ffffff'}, slate:{bg: '#1e293b', border: '#334155', text: '#ffffff'}};function fixMermaidContrast(){function getLuminance(hex){let r, g, b;if(!hex || hex==='none' || hex==='transparent'){return 0.5;}if(hex.startsWith('rgb')){const match=hex.match(/\d+/g);if(match){r=parseInt(match[0]);g=parseInt(match[1]);b=parseInt(match[2]);}else{return 0.5;}}else{hex=hex.replace('#', '');if(hex.length===3){hex=hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];}if(hex.length !==6){return 0.5;}r=parseInt(hex.substr(0, 2), 16);g=parseInt(hex.substr(2, 2), 16);b=parseInt(hex.substr(4, 2), 16);}if(isNaN(r)|| isNaN(g)|| isNaN(b)){return 0.5;}const rsRGB=r / 255;const gsRGB=g / 255;const bsRGB=b / 255;const rLum=rsRGB <=0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055)/ 1.055, 2.4);const gLum=gsRGB <=0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055)/ 1.055, 2.4);const bLum=bsRGB <=0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055)/ 1.055, 2.4);return 0.2126 * rLum + 0.7152 * gLum + 0.0722 * bLum;}function getContrastColor(bgColor){const luminance=getLuminance(bgColor);return luminance > 0.35 ? '#1e293b' : '#ffffff';}function applyContrastToText(textEl, contrastColor){textEl.style.setProperty('color', contrastColor, 'important');textEl.style.setProperty('fill', contrastColor, 'important');textEl.setAttribute('fill', contrastColor);textEl.querySelectorAll('tspan').forEach(function(tspan){tspan.style.setProperty('fill', contrastColor, 'important');tspan.setAttribute('fill', contrastColor);});}document.querySelectorAll('.mermaid svg').forEach(function(svg){svg.querySelectorAll('.cluster').forEach(function(cluster){const label=cluster.querySelector('.cluster-label');const rect=cluster.querySelector('rect');if(label && rect){const labelBBox=label.getBBox ? label.getBBox(): null;const foreignObj=label.querySelector('foreignObject');if(foreignObj){const currentHeight=parseFloat(foreignObj.getAttribute('height'))|| 20;const textContent=foreignObj.textContent || '';if(textContent.length > 20 || textContent.includes('\n')){foreignObj.setAttribute('height', Math.max(currentHeight, 40));foreignObj.style.overflow='visible';}}label.querySelectorAll('text, span, div, p, tspan').forEach(function(textEl){textEl.style.setProperty('fill', '#1e293b', 'important');textEl.style.setProperty('color', '#1e293b', 'important');textEl.style.setProperty('font-weight', '700', 'important');});}});svg.querySelectorAll('.node rect, .node polygon, .node circle, .node ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.node');if(parent){parent.querySelectorAll('.nodeLabel, .label, text, foreignObject span, foreignObject p, foreignObject div').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.cluster rect, .cluster polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.cluster');if(parent){parent.querySelectorAll('.cluster-label, .cluster-label span, .cluster-label text, .nodeLabel, text').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('[style*="fill"]').forEach(function(el){const style=el.getAttribute('style');if(style){const fillMatch=style.match(/fill:\s*([^;]+)/i);if(fillMatch){const fill=fillMatch[1].trim();if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);el.querySelectorAll('text, span, p, div, .nodeLabel, .label').forEach(function(textEl){applyContrastToText(textEl, contrastColor);});if(el.tagName.toLowerCase()==='g'){el.querySelectorAll('foreignObject *').forEach(function(fo){fo.style.setProperty('color', contrastColor, 'important');});}}}}});svg.querySelectorAll('g.node').forEach(function(node){const shape=node.querySelector('rect, polygon, circle, ellipse, path');if(shape){const fill=shape.getAttribute('fill')|| shape.style.fill || window.getComputedStyle(shape).fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const contrastColor=getContrastColor(fill);node.querySelectorAll('.nodeLabel, .label, text, span, div, p').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.actor, rect.actor, .actor-top, .actor-bottom').forEach(function(rect){rect.style.setProperty('fill', DARK_COLORS.blue.bg, 'important');rect.style.setProperty('stroke', DARK_COLORS.blue.border, 'important');rect.setAttribute('fill', DARK_COLORS.blue.bg);rect.setAttribute('stroke', DARK_COLORS.blue.border);});svg.querySelectorAll('text.actor, .actor-man').forEach(function(text){applyContrastToText(text, DARK_COLORS.blue.text);});svg.querySelectorAll('.messageText').forEach(function(text){applyContrastToText(text, '#1e293b');text.style.setProperty('stroke', 'none', 'important');});svg.querySelectorAll('.messageLine0, .messageLine1').forEach(function(line){line.style.setProperty('stroke', '#334155', 'important');line.style.setProperty('stroke-width', '2px', 'important');line.setAttribute('stroke', '#334155');line.setAttribute('stroke-width', '2');});svg.querySelectorAll('.arrowhead path, marker path, #arrowhead path').forEach(function(arrow){arrow.style.setProperty('fill', '#334155', 'important');arrow.style.setProperty('stroke', '#334155', 'important');arrow.setAttribute('fill', '#334155');arrow.setAttribute('stroke', '#334155');});svg.querySelectorAll('marker').forEach(function(marker){marker.querySelectorAll('path, polygon').forEach(function(shape){shape.style.setProperty('fill', '#334155', 'important');shape.setAttribute('fill', '#334155');});});svg.querySelectorAll('.actor-line').forEach(function(line){line.style.setProperty('stroke', '#64748b', 'important');line.style.setProperty('stroke-width', '1.5px', 'important');line.setAttribute('stroke', '#64748b');});svg.querySelectorAll('.loopText, .labelText').forEach(function(text){text.style.setProperty('fill', '#334155', 'important');text.setAttribute('fill', '#334155');});svg.querySelectorAll('.loopText tspan, .labelText tspan').forEach(function(tspan){tspan.style.setProperty('fill', '#334155', 'important');tspan.setAttribute('fill', '#334155');});svg.querySelectorAll('.note rect, rect.note').forEach(function(rect){rect.style.setProperty('fill', PASTEL_COLORS.yellow.bg, 'important');rect.style.setProperty('stroke', PASTEL_COLORS.yellow.border, 'important');rect.setAttribute('fill', PASTEL_COLORS.yellow.bg);});svg.querySelectorAll('.noteText, .noteText tspan').forEach(function(text){applyContrastToText(text, PASTEL_COLORS.yellow.text);});svg.querySelectorAll('.sequenceNumber').forEach(function(text){applyContrastToText(text, '#1e293b');});svg.querySelectorAll('.classGroup rect, .classGroup polygon').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.classGroup');if(parent){parent.querySelectorAll('text, .classTitle, .classLabel, tspan').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.stateGroup rect, .statediagram-state rect').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent'){const contrastColor=getContrastColor(fill);const parent=shape.closest('.stateGroup, .statediagram-state');if(parent){parent.querySelectorAll('text, .stateLabel, tspan, span').forEach(function(label){applyContrastToText(label, contrastColor);});}}});svg.querySelectorAll('.er.entityBox, .entityBox, rect.er').forEach(function(shape){shape.style.setProperty('fill', '#dbeafe', 'important');shape.style.setProperty('stroke', '#3b82f6', 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', '#dbeafe');shape.setAttribute('stroke', '#3b82f6');});svg.querySelectorAll('.er.entityLabel, .entityLabel, text.er').forEach(function(text){applyContrastToText(text, '#1e3a8a');});svg.querySelectorAll('.er.attributeBoxEven, .er.attributeBoxOdd').forEach(function(shape){const isEven=shape.classList.contains('attributeBoxEven');shape.style.setProperty('fill', isEven ? '#f8fafc' : '#f1f5f9', 'important');shape.style.setProperty('stroke', '#cbd5e1', 'important');});svg.querySelectorAll('g.er text, .erDiagram text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});const mindmapColors=[{bg: '#dbeafe', border: '#3b82f6', text: '#1e3a8a'},{bg: '#dcfce7', border: '#22c55e', text: '#14532d'},{bg: '#fef9c3', border: '#eab308', text: '#713f12'},{bg: '#fce7f3', border: '#ec4899', text: '#831843'},{bg: '#f3e8ff', border: '#a855f7', text: '#581c87'},{bg: '#cffafe', border: '#06b6d4', text: '#164e63'},{bg: '#ffedd5', border: '#f97316', text: '#7c2d12'}];let colorIndex=0;svg.querySelectorAll('.mindmap-node').forEach(function(node){const shape=node.querySelector('rect, circle, ellipse, polygon, path');if(shape){const color=mindmapColors[colorIndex % mindmapColors.length];shape.style.setProperty('fill', color.bg, 'important');shape.style.setProperty('stroke', color.border, 'important');shape.style.setProperty('stroke-width', '2px', 'important');shape.setAttribute('fill', color.bg);shape.setAttribute('stroke', color.border);node.querySelectorAll('text, span, .nodeLabel, foreignObject *').forEach(function(label){applyContrastToText(label, color.text);});colorIndex++;}});svg.querySelectorAll('.mindmap text, [class*="mindmap"] text').forEach(function(text){const fill=text.getAttribute('fill')|| text.style.fill;const lum=getLuminance(fill);if(lum > 0.6 || !fill || fill==='none'){applyContrastToText(text, '#1e293b');}});svg.querySelectorAll('rect, polygon, circle, ellipse').forEach(function(shape){const fill=shape.getAttribute('fill')|| shape.style.fill;if(fill && fill !=='none' && fill !=='transparent' && !fill.startsWith('url')){const luminance=getLuminance(fill);if(luminance < 0.35){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum < 0.5){applyContrastToText(textEl, '#ffffff');}});}}else if(luminance > 0.65){const parent=shape.parentNode;if(parent){parent.querySelectorAll('text, .nodeLabel, .label, span, tspan').forEach(function(textEl){const textFill=textEl.getAttribute('fill')|| textEl.style.fill;const textLum=getLuminance(textFill);if(textLum > 0.7){applyContrastToText(textEl, '#1e293b');}});}}}});});}if(typeof window !=='undefined'){window.fixMermaidContrast=fixMermaidContrast;window.MERMAID_PASTEL_COLORS=PASTEL_COLORS;window.MERMAID_DARK_COLORS=DARK_COLORS;}
+    </script>
+    
+    
+    
+    
+    
+    <style>
+        @media print {
+            body {
+                max-width: none;
+                padding: 20mm;
+            }
+            
+            pre, code {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            table, pre, blockquote, .mermaid {
+                page-break-inside: avoid;
+            }
+            
+            h1, h2, h3 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Sayf BEJAOUI</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">1385900.00000000</mso:Order>
+<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Sayf BEJAOUI</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
+<mso:ContentTypeId msdt:dt="string">0x010100C70A928A2C121D448C42796C314F191A</mso:ContentTypeId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+<mso:TaxCatchAll msdt:dt="string"></mso:TaxCatchAll>
+<mso:MediaServiceImageTags msdt:dt="string"></mso:MediaServiceImageTags>
+<mso:lcf76f155ced4ddcb4097134ff3c332f msdt:dt="string"></mso:lcf76f155ced4ddcb4097134ff3c332f>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+    
+    <article class="markdown-body">
+        <h1 id="cahier-des-charges-projet-a-marketplace-analytics">Cahier des charges — Projet A : MarketPlace Analytics</h1>
+<blockquote>
+<p><strong>Version :</strong> 3.0 (avril 2026)
+<strong>Pitch</strong> : <a href="pitch.md">pitch.md</a> · <strong>Règles communes</strong> : <a href="../Documentation commune.html">Documentation commune.html</a></p>
+</blockquote>
+<hr />
+<h2 id="1-contexte">1. Contexte</h2>
+<p>Vous êtes Data Engineer dans <strong>Maelys Marketplace</strong>, une marketplace e-commerce française qui met en relation des vendeurs indépendants (artisans, marques DNVB, revendeurs) et des consommateurs finaux. Maelys prend une commission de 12% sur chaque vente.</p>
+<p><strong>Chiffres (fictifs) :</strong></p>
+<ul>
+<li>2 400 vendeurs actifs · 180 000 produits · ~8 500 commandes/jour</li>
+<li>CA mensuel ~4.2 M€</li>
+<li>75 personnes en interne dont 1 analyste qui passe <strong>2 jours par semaine</strong> à extraire à la main les données du backoffice pour produire des rapports Excel</li>
+</ul>
+<h3 id="le-besoin">Le besoin</h3>
+<p>Le <strong>CEO</strong> veut un dashboard hebdomadaire avec les KPIs clés (top vendeurs, CA par catégorie, panier moyen). L'<strong>équipe finance</strong> a besoin de données fiables pour la clôture mensuelle et la facturation des commissions. Le <strong>responsable catalogue</strong> veut détecter les anomalies (drop de ventes, prix suspects).</p>
+<p>Aujourd'hui : <strong>tout est manuel</strong>, les rapports sont en retard, les erreurs de copier-coller sont fréquentes, et l'analyste passe 40% de son temps sur de l'extraction au lieu de faire de l'analyse.</p>
+<h3 id="votre-mission">Votre mission</h3>
+<p>Construire en 2 jours un <strong>MVP de plateforme data</strong> qui :</p>
+<ol>
+<li>Ingère automatiquement les données depuis l'API du backoffice</li>
+<li>Les stocke dans un Data Warehouse propre (modélisation dimensionnelle)</li>
+<li>Expose des KPIs lisibles via un outil BI (Metabase)</li>
+<li>Détecte les anomalies commerciales basiques</li>
+</ol>
+<p>Vous êtes l'équipe Data nouvellement recrutée. Aucune infrastructure data n'existe — vous partez de zéro. Le code doit être maintenable, testé, et reproductible (Docker Compose).</p>
+<hr />
+<h2 id="2-objectifs-pedagogiques">2. Objectifs pédagogiques</h2>
+<p>À la fin du projet, vous saurez :</p>
+<ul>
+<li>🟢 Construire un pipeline ELT idempotent end-to-end avec Airflow 3.1.8</li>
+<li>🟢 Implémenter un Custom Hook pour une API REST authentifiée</li>
+<li>🟢 Modéliser un schéma dimensionnel en étoile (Kimball)</li>
+<li>🟢 Utiliser MinIO comme zone de "raw layer" (data lake S3-compatible)</li>
+<li>🟢 Exposer des KPIs business via Metabase</li>
+<li>🟢 Brancher Prometheus + Grafana pour la supervision technique du pipeline (bonus)</li>
+<li>🟢 Tester un pipeline avec pytest</li>
+</ul>
+<hr />
+<h2 id="3-architecture-cible">3. Architecture cible</h2>
+<h3 id="31-vue-densemble">3.1 Vue d'ensemble</h3>
+<pre class="mermaid">
+flowchart LR
+    subgraph t_src["Sources"]
+        t_api[("API Marketplace<br/>Flask simulee")]
+    end
+
+    subgraph t_orch["Orchestration"]
+        t_hook["MarketplaceAPIHook"]
+        t_airflow[["Airflow 3.1.8<br/>4-5 DAGs"]]
+    end
+
+    subgraph t_store["Stockage"]
+        t_minio[("MinIO<br/>raw partition dt=")]
+        t_pg[("PostgreSQL 18<br/>staging / dwh / analytics")]
+    end
+
+    subgraph t_serv["Serving BI"]
+        t_meta["Metabase 59<br/>4 dashboards"]
+    end
+
+    subgraph t_obs["Observabilite bonus"]
+        t_prom[("Prometheus")]
+        t_graf["Grafana"]
+    end
+
+    t_api --> t_hook
+    t_hook --> t_airflow
+    t_airflow -- "upload raw JSON" --> t_minio
+    t_airflow -- "load + transform" --> t_pg
+    t_pg --> t_meta
+    t_airflow -. "metrics StatsD" .-> t_prom
+    t_pg -. "postgres-exporter" .-> t_prom
+    t_prom --> t_graf
+
+    style t_airflow fill:#4a90d9,color:#fff
+    style t_pg fill:#f5a623,color:#000
+    style t_meta fill:#509ee3,color:#fff
+    style t_prom fill:#e6522c,color:#fff
+</pre>
+
+<h3 id="32-flux-dun-pipeline-run">3.2 Flux d'un pipeline run</h3>
+<pre class="mermaid">
+sequenceDiagram
+    participant S as Scheduler
+    participant H as MarketplaceAPIHook
+    participant A as API Marketplace
+    participant M as MinIO
+    participant P as PostgreSQL
+    participant MB as Metabase
+
+    S->>H: declenche extract (date={{ ds }})
+    H->>A: GET /orders?date=...
+    A-->>H: JSON N commandes
+    H->>M: PUT raw/orders/dt=.../data.json
+    H->>P: INSERT staging.orders (idempotent)
+    S->>P: DELETE + INSERT dwh.fact_orders WHERE dt = ...
+    S->>P: REFRESH analytics.daily_summary
+    MB->>P: SELECT pour le dashboard
+</pre>
+
+<h3 id="33-pourquoi-cette-architecture">3.3 Pourquoi cette architecture</h3>
+<ul>
+<li><strong>MinIO comme raw layer</strong> : conserver le JSON brut en archive permet de <strong>rejouer</strong> un pipeline si la transformation a un bug, sans devoir re-appeler l'API source. C'est le pattern "data lake first".</li>
+<li><strong>3 schémas PostgreSQL séparés</strong> : <code>staging</code> (données brutes typées), <code>dwh</code> (modèle dimensionnel propre), <code>analytics</code> (agrégations pré-calculées pour les dashboards). C'est plus propre qu'un seul schéma fourre-tout.</li>
+<li><strong>Metabase plutôt que Superset</strong> : plus simple à mettre en place, suffisant pour 4 dashboards, et l'install Docker est triviale.</li>
+<li><strong>Pas de Spark / dbt</strong> : Airflow gère lui-même les transformations SQL via <code>PostgresHook.run()</code>. Pour 8 500 commandes/jour, c'est largement suffisant.</li>
+</ul>
+<hr />
+<h2 id="4-stack-technique">4. Stack technique</h2>
+<p>Versions et tags Docker : voir <a href="../Documentation commune.html">Documentation commune.html</a></p>
+<h3 id="41-services-docker-compose">4.1 Services Docker Compose</h3>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+<th>Volume</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>airflow-apiserver</code></td>
+<td>8080</td>
+<td>—</td>
+<td>UI + API REST</td>
+</tr>
+<tr>
+<td><code>airflow-scheduler</code></td>
+<td>—</td>
+<td>—</td>
+<td>Scheduler</td>
+</tr>
+<tr>
+<td><code>airflow-dag-processor</code></td>
+<td>—</td>
+<td>—</td>
+<td>DAG parsing</td>
+</tr>
+<tr>
+<td><code>airflow-triggerer</code></td>
+<td>—</td>
+<td>—</td>
+<td>Deferrable ops</td>
+</tr>
+<tr>
+<td><code>airflow-worker</code></td>
+<td>—</td>
+<td>—</td>
+<td>Exécution tasks</td>
+</tr>
+<tr>
+<td><code>postgres-airflow</code></td>
+<td>5432</td>
+<td><code>pg-airflow-data</code></td>
+<td>Metadata DB</td>
+</tr>
+<tr>
+<td><code>postgres-dwh</code></td>
+<td>5433</td>
+<td><code>pg-dwh-data</code></td>
+<td>Data Warehouse</td>
+</tr>
+<tr>
+<td><code>redis</code></td>
+<td>6379</td>
+<td>—</td>
+<td>Celery broker</td>
+</tr>
+<tr>
+<td><code>minio</code></td>
+<td>9000/9001</td>
+<td><code>minio-data</code></td>
+<td>Object storage</td>
+</tr>
+<tr>
+<td><code>minio-init</code></td>
+<td>—</td>
+<td>—</td>
+<td>Crée le bucket <code>data-lake</code> au démarrage</td>
+</tr>
+<tr>
+<td><code>api-marketplace</code></td>
+<td>5000</td>
+<td>—</td>
+<td>API Flask simulée</td>
+</tr>
+<tr>
+<td><code>metabase</code></td>
+<td>3000</td>
+<td><code>metabase-data</code></td>
+<td>BI (à ajouter au J2)</td>
+</tr>
+<tr>
+<td><strong><code>prometheus</code></strong> (bonus)</td>
+<td>9090</td>
+<td><code>prometheus-data</code></td>
+<td>Supervision</td>
+</tr>
+<tr>
+<td><strong><code>grafana</code></strong> (bonus)</td>
+<td>3001</td>
+<td><code>grafana-data</code></td>
+<td>Dashboards techniques</td>
+</tr>
+<tr>
+<td><strong><code>postgres-exporter</code></strong> (bonus)</td>
+<td>9187</td>
+<td>—</td>
+<td>Métriques PostgreSQL</td>
+</tr>
+<tr>
+<td><strong><code>statsd-exporter</code></strong> (bonus)</td>
+<td>9102</td>
+<td>—</td>
+<td>Métriques Airflow</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-comment-lire-le-docker-composeyaml">4.2 Comment lire le <code>docker-compose.yaml</code></h3>
+<p>Le fichier que vous trouverez dans le kit a une structure standard :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">x-airflow-common</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;airflow-common</span><span class="w">      </span><span class="c1"># Bloc partagé entre tous les services Airflow</span>
+<span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">apache/airflow:3.1.8</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;airflow-common-env</span><span class="w">     </span><span class="c1"># Variables d&#39;env communes</span>
+<span class="w">    </span><span class="nt">AIRFLOW__CORE__EXECUTOR</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CeleryExecutor</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="nt">volumes</span><span class="p">:</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./dags:/opt/airflow/dags</span><span class="w">         </span><span class="c1"># Vos DAGs sont montés ici</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./plugins:/opt/airflow/plugins</span><span class="w">   </span><span class="c1"># Vos hooks et operators custom</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./logs:/opt/airflow/logs</span>
+
+<span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">airflow-scheduler</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">&lt;&lt;</span><span class="p">:</span><span class="w"> </span><span class="nv">*airflow-common</span><span class="w">                </span><span class="c1"># Hérite du bloc commun</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scheduler</span>
+<span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<blockquote>
+<p>🟠 <strong>Si vous modifiez le bloc <code>x-airflow-common</code></strong>, tous les services Airflow doivent être redémarrés ensemble (<code>docker compose up -d --force-recreate</code>).</p>
+</blockquote>
+<h3 id="43-commandes-docker-indispensables">4.3 Commandes Docker indispensables</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Demarrage initial (premier run, cree volumes + init DB)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<span class="c1"># Attendre ~60 secondes que tous les services soient healthy</span>
+
+<span class="c1"># Verifier l&#39;etat des services</span>
+docker<span class="w"> </span>compose<span class="w"> </span>ps
+
+<span class="c1"># Suivre les logs d&#39;un service en temps reel</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>airflow-scheduler<span class="w"> </span>--tail<span class="o">=</span><span class="m">50</span>
+
+<span class="c1"># Entrer dans un conteneur (debugging)</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>airflow-worker<span class="w"> </span>bash
+
+<span class="c1"># Tester un DAG en mode test (sans passer par le scheduler)</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>airflow-worker<span class="w"> </span>airflow<span class="w"> </span>dags<span class="w"> </span><span class="nb">test</span><span class="w"> </span>marketplace_orders_ingest_daily<span class="w"> </span><span class="m">2026</span>-04-07
+
+<span class="c1"># Recreer un service apres modification du docker-compose.yaml</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>metabase
+
+<span class="c1"># Tout arreter (les volumes sont conserves)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down
+
+<span class="c1"># Reset complet (volumes supprimes, attention aux donnees)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+</code></pre></div>
+<hr />
+<h2 id="5-api-marketplace-fournie">5. API Marketplace (fournie)</h2>
+<p>L'API Flask simulée tourne dans un conteneur (<code>api-marketplace</code>) et expose ces endpoints avec authentification Bearer (<code>formation-token-2026</code>) :</p>
+<table>
+<thead>
+<tr>
+<th>Méthode</th>
+<th>Endpoint</th>
+<th>Paramètres</th>
+<th>Retour</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/health</code></td>
+<td>—</td>
+<td><code>{status, version}</code></td>
+<td>Pas d'auth requise</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/orders</code></td>
+<td><code>date=YYYY-MM-DD</code></td>
+<td>liste de commandes</td>
+<td>Auth requise</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/sellers</code></td>
+<td><code>limit</code></td>
+<td>liste de vendeurs</td>
+<td>Auth requise</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/products</code></td>
+<td>—</td>
+<td>catalogue</td>
+<td>Auth requise</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/customers</code></td>
+<td><code>limit</code></td>
+<td>liste clients</td>
+<td>Auth requise</td>
+</tr>
+</tbody>
+</table>
+<h3 id="51-pourquoi-cette-api-est-deterministe">5.1 Pourquoi cette API est "déterministe"</h3>
+<p>L'API génère ses données à partir d'un <strong>hash de la date</strong> : <code>seed = md5(date)</code>. Conséquence : <strong>un même date = un même résultat</strong>. C'est ce qui vous permet de tester l'idempotence (rejouer un run et vérifier que les données sont identiques).</p>
+<h3 id="52-tester-lapi-a-la-main">5.2 Tester l'API à la main</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Health check</span>
+curl<span class="w"> </span>http://localhost:5000/health
+
+<span class="c1"># Avec authentification</span>
+curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer formation-token-2026&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;http://localhost:5000/orders?date=2026-04-07&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>🟠 Si vous oubliez le header <code>Authorization</code>, l'API renvoie un <code>401 Unauthorized</code>. C'est volontaire — pour vous forcer à utiliser une <code>Connection</code> Airflow plutôt que de hardcoder le token.</p>
+</blockquote>
+<hr />
+<h2 id="6-user-stories">6. User stories</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>En tant que...</th>
+<th>Je veux...</th>
+<th>Priorité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US-01</td>
+<td>CEO</td>
+<td>voir le CA total par jour sur 30 jours</td>
+<td>🟠 Must</td>
+</tr>
+<tr>
+<td>US-02</td>
+<td>CEO</td>
+<td>connaître le top 10 vendeurs par revenu</td>
+<td>🟠 Must</td>
+</tr>
+<tr>
+<td>US-03</td>
+<td>Finance</td>
+<td>avoir un récapitulatif des commissions par jour</td>
+<td>🟠 Must</td>
+</tr>
+<tr>
+<td>US-04</td>
+<td>Responsable catalogue</td>
+<td>voir la répartition CA par catégorie</td>
+<td>🟡 Should</td>
+</tr>
+<tr>
+<td>US-05</td>
+<td>Analyste</td>
+<td>être alerté si le CA du jour &lt; 70% de la moyenne 7j</td>
+<td>🟡 Should</td>
+</tr>
+<tr>
+<td>US-06</td>
+<td>Analyste</td>
+<td>rejouer le pipeline sur une date passée</td>
+<td>🔵 Could</td>
+</tr>
+<tr>
+<td>US-07</td>
+<td>Ops</td>
+<td>superviser l'état du pipeline (alerte si DAG fail)</td>
+<td>🔵 Could</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-perimetre-mvp-vs-bonus">7. Périmètre — MVP vs Bonus</h2>
+<h3 id="71-must-have-mvp-obligatoire">7.1 🟠 Must have (MVP — obligatoire)</h3>
+<ul>
+<li><strong>1 Custom Hook</strong> : <code>MarketplaceAPIHook</code> avec méthodes pour <code>/orders</code>, <code>/sellers</code>, <code>/products</code></li>
+<li><strong>Pipeline ELT principal</strong> :</li>
+<li>Extract via le Hook</li>
+<li>Upload raw JSON dans MinIO (partition <code>dt=YYYY-MM-DD</code>)</li>
+<li>Load dans <code>staging.orders</code></li>
+<li>Transform vers <code>dwh.fact_orders</code> (idempotent — DELETE + INSERT par partition)</li>
+<li><strong>Modèle dimensionnel simple</strong> : au moins <code>dim_seller</code>, <code>dim_product</code>, <code>fact_orders</code></li>
+<li><strong>2 dashboards Metabase</strong> : CA journalier + top vendeurs</li>
+<li><strong>Tests pytest</strong> ≥ 3 (dont vérification idempotence)</li>
+</ul>
+<h3 id="72-should-have-bonus-5-pts">7.2 🟡 Should have (bonus +5 pts)</h3>
+<ul>
+<li><strong>Custom Operator</strong> <code>DataQualityOperator</code> avec 3 règles configurables (not null, not empty, pas de future date)</li>
+<li><strong>Branching</strong> dans le DAG : si DQ KO → tâche d'alerte au lieu du load DWH</li>
+<li><strong>2 dashboards Metabase supplémentaires</strong> (commissions, catégories)</li>
+</ul>
+<h3 id="73-could-have-bonus-10-pts">7.3 🔵 Could have (bonus +10 pts)</h3>
+<ul>
+<li><strong>Stack observabilité Prometheus + Grafana</strong> (voir §10 et <a href="../Documentation commune.html">Documentation commune.html</a>)</li>
+<li>DAG d'anomaly detection avec écart à la moyenne mobile 7j</li>
+<li>Backfill manuel sur 7 jours historiques documenté</li>
+<li>Tests pytest avec mock de la DB</li>
+</ul>
+<h3 id="74-wont-have-ne-pas-chercher-a-faire">7.4 🔴 Won't have (ne pas chercher à faire)</h3>
+<ul>
+<li>Dimensions type SCD2 (over-engineering pour ce projet)</li>
+<li>CI/CD GitHub Actions</li>
+<li>Migration vers cloud</li>
+</ul>
+<blockquote>
+<p>🟠 <strong>Règle d'or</strong> : livrer le MVP à 100% <strong>avant</strong> toute tentative de bonus. Un MVP propre et testé &gt; un projet ambitieux bancal.</p>
+</blockquote>
+<hr />
+<h2 id="8-modele-de-donnees-a-concevoir">8. Modèle de données (à concevoir)</h2>
+<h3 id="81-contraintes">8.1 Contraintes</h3>
+<p>Vous devez concevoir vous-mêmes le schéma <strong>en étoile</strong> (Kimball). Les contraintes :</p>
+<ul>
+<li>Schémas <code>staging</code>, <code>dwh</code>, <code>analytics</code> séparés</li>
+<li>Au moins <strong>3 dimensions</strong> + <strong>1 table de faits</strong></li>
+<li>Les dimensions doivent avoir une <code>PRIMARY KEY</code></li>
+<li>La table de faits doit avoir des <code>FOREIGN KEY</code> vers les dimensions</li>
+<li>Au moins <strong>1 table d'agrégation</strong> dans <code>analytics</code></li>
+</ul>
+<h3 id="82-pourquoi-un-schema-en-etoile">8.2 Pourquoi un schéma en étoile</h3>
+<ul>
+<li><strong>Performances</strong> : les jointures dim ↔ fait sont optimisées par PostgreSQL</li>
+<li><strong>Lisibilité</strong> : un analyste comprend immédiatement la structure</li>
+<li><strong>Reporting</strong> : Metabase est conçu pour ce modèle (auto-detection des relations)</li>
+<li><strong>Évolutivité</strong> : ajouter une nouvelle dimension ne casse rien</li>
+</ul>
+<h3 id="83-conseil-de-design">8.3 Conseil de design</h3>
+<p>Commencez simple :</p>
+<div class="highlight"><pre><span></span><code>dim_seller (id, name, country, joined_date)
+dim_product (id, name, category, seller_id)
+dim_date (dt, year, month, day_of_week)
+fact_orders (order_id, dt, seller_id, product_id, quantity, total, commission)
+analytics.daily_summary (dt, total_orders, total_revenue, top_seller_id)
+</code></pre></div>
+<blockquote>
+<p>🔵 <strong>Conseil</strong> : ne sur-modélisez pas. 4 tables propres valent mieux que 12 tables bancales.</p>
+</blockquote>
+<p>Livrable : un fichier <code>init-db/schema.sql</code> avec vos <code>CREATE SCHEMA</code> et <code>CREATE TABLE</code>.</p>
+<hr />
+<h2 id="9-specifications-techniques">9. Spécifications techniques</h2>
+<h3 id="91-dags-attendus-noms-suggeres">9.1 DAGs attendus (noms suggérés)</h3>
+<table>
+<thead>
+<tr>
+<th>DAG</th>
+<th>Schedule</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>marketplace_dims_refresh_daily</code></td>
+<td><code>@daily</code></td>
+<td>Refresh <code>dim_seller</code>, <code>dim_product</code></td>
+</tr>
+<tr>
+<td><code>marketplace_orders_ingest_daily</code></td>
+<td><code>@daily</code></td>
+<td>Pipeline principal : extract → raw → staging → dwh</td>
+</tr>
+<tr>
+<td><code>marketplace_analytics_aggregate_daily</code></td>
+<td>Asset-scheduled</td>
+<td>Build des tables analytics</td>
+</tr>
+<tr>
+<td><code>marketplace_anomaly_detect_daily</code> (bonus)</td>
+<td><code>@daily</code></td>
+<td>Détection anomalies CA</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92-custom-hook-a-designer">9.2 Custom Hook (à designer)</h3>
+<p>Le <code>MarketplaceAPIHook</code> doit :</p>
+<ul>
+<li>Hériter de <code>BaseHook</code></li>
+<li>Lire la <strong>Connection Airflow</strong> <code>marketplace_api</code> (host = URL, password = token Bearer)</li>
+<li>Exposer au minimum : <code>get_orders(date)</code>, <code>get_sellers()</code>, <code>get_products()</code></li>
+<li>Gérer les erreurs HTTP (timeout, 5xx) avec un retry</li>
+<li>Être testable unitairement (mock de <code>requests</code>)</li>
+</ul>
+<blockquote>
+<p>🔵 Vous concevez la signature et l'implémentation. Ne cherchez pas un template tout prêt — c'est l'exercice.</p>
+</blockquote>
+<h3 id="93-pattern-didempotence-obligatoire">9.3 Pattern d'idempotence (obligatoire)</h3>
+<p>Pour chaque run daté <code>{{ ds }}</code>, votre transformation <code>staging → dwh</code> doit faire :</p>
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span><span class="p">;</span>
+<span class="w">  </span><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">dwh</span><span class="p">.</span><span class="n">fact_orders</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;{{ ds }}&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">dwh</span><span class="p">.</span><span class="n">fact_orders</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">staging</span><span class="p">.</span><span class="n">orders</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;{{ ds }}&#39;</span><span class="p">;</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Pourquoi <code>DELETE + INSERT</code> plutôt qu'un <code>MERGE</code> / <code>UPSERT</code> ?</strong> Parce que c'est :</p>
+<ul>
+<li>Plus simple (pas de gestion de conflit ligne par ligne)</li>
+<li>Plus performant pour des batches &gt; 1000 lignes</li>
+<li>Plus facile à débugger (la table est dans un état connu après chaque run)</li>
+</ul>
+<p><strong>Règle absolue</strong> : rejouer un run avec la même date = même résultat en base. <strong>Non négociable</strong>.</p>
+<hr />
+<h2 id="10-metabase">10. Metabase</h2>
+<h3 id="101-configuration-docker">10.1 Configuration Docker</h3>
+<p>Service à <strong>ajouter dans le <code>docker-compose.yaml</code></strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">metabase</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metabase/metabase:v0.59.6.1</span>
+<span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;3000:3000&quot;</span>
+<span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">MB_DB_TYPE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">h2</span>
+<span class="w">      </span><span class="nt">MB_DB_FILE</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metabase-data/metabase.db</span>
+<span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">metabase-data:/metabase-data</span>
+<span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres-dwh</span>
+<span class="w">    </span><span class="nt">networks</span><span class="p">:</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airflow-net</span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">metabase-data</span><span class="p">:</span>
+</code></pre></div>
+<blockquote>
+<p>🟠 <strong>Le volume <code>metabase-data</code> est CRUCIAL.</strong> Sans lui, vos dashboards seront perdus à chaque <code>docker compose down -v</code>. Si vous voulez une persistance encore meilleure, utilisez PostgreSQL au lieu de H2 comme metadata DB de Metabase (plus complexe mais production-grade).</p>
+</blockquote>
+<h3 id="102-premier-login">10.2 Premier login</h3>
+<ol>
+<li>Aller sur <a href="http://localhost:3000">http://localhost:3000</a></li>
+<li>Créer un compte admin (formation : <code>admin@maelys.local</code> / <code>Admin2026!</code>)</li>
+<li>Ajouter une source de données :</li>
+</ol>
+<ul>
+<li>Type : <strong>PostgreSQL</strong></li>
+<li>Host : <strong><code>postgres-dwh</code></strong> (nom Docker, pas <code>localhost</code> !)</li>
+<li>Port : <code>5432</code> (port <strong>interne</strong>, pas <code>5433</code>)</li>
+<li>Database : <code>dwh</code></li>
+<li>Username / password : ceux du <code>.env</code></li>
+</ul>
+<h3 id="103-dashboards-mvp-2-minimum">10.3 Dashboards (MVP : 2 minimum)</h3>
+<p><strong>Dashboard 1 — Executive Summary</strong></p>
+<ul>
+<li>KPI : CA total aujourd'hui (Big Number)</li>
+<li>Line chart : CA des 30 derniers jours</li>
+<li>Bar chart : Top 5 vendeurs du jour</li>
+</ul>
+<p><strong>Dashboard 2 — Top Sellers</strong></p>
+<ul>
+<li>Bar chart : Top 10 vendeurs du mois</li>
+<li>Line chart : Évolution du CA des top 3 sur 30 jours</li>
+<li>Table : Liste des vendeurs inactifs (&gt; 7 jours sans vente)</li>
+</ul>
+<blockquote>
+<p>🔵 <strong>Conseil</strong> : les questions Metabase peuvent être créées en <strong>mode visuel</strong> (sans SQL) ou via l'<strong>éditeur SQL natif</strong>. Pour les KPIs simples, le mode visuel suffit. Pour les agrégations complexes, écrivez du SQL — c'est plus rapide.</p>
+</blockquote>
+<hr />
+<h2 id="11-decoupage-du-projet">11. Découpage du projet</h2>
+<h3 id="111-jour-1-construire-le-pipeline-elt">11.1 — Construire le pipeline ELT</h3>
+<p>L'objectif de la 1ere partie est d'avoir un <strong>pipeline qui tourne de bout en bout</strong>, même minimaliste. À la fin de la journée, vous devez pouvoir déclencher un DAG dans l'UI Airflow et constater que des données arrivent dans <code>dwh.fact_orders</code>.</p>
+<p><strong>Étapes recommandées dans l'ordre :</strong></p>
+<ol>
+<li><strong>Démarrer le stack</strong> (<code>docker compose up -d</code>) et vérifier que tous les services sont healthy. C'est le bon moment pour explorer l'UI Airflow et les services PostgreSQL/MinIO.</li>
+<li><strong>Tester l'API à la main</strong> avec <code>curl</code> pour comprendre son format de retour. C'est plus rapide que de débugger un DAG qui appelle une API qu'on ne connaît pas.</li>
+<li><strong>Concevoir le modèle dimensionnel</strong> sur papier ou Mermaid avant d'écrire du SQL. Identifier les dimensions et les faits, puis écrire le <code>init-db/schema.sql</code>. Lancez-le manuellement avec <code>psql</code> pour vérifier qu'il passe.</li>
+<li><strong>Implémenter le <code>MarketplaceAPIHook</code></strong> : c'est la pierre angulaire de tout le pipeline. Encapsulez l'auth Bearer (lue depuis la <code>Connection</code>) et exposez les méthodes <code>get_orders</code>, <code>get_sellers</code>, <code>get_products</code>. Testez-le isolément via un script Python avant de l'intégrer dans un DAG.</li>
+<li><strong>Écrire le DAG d'ingestion étape par étape</strong> : commencez par une seule task qui extract et imprime le résultat. Une fois que ça marche, ajoutez l'upload MinIO (via <code>S3Hook</code>), puis le load dans <code>staging.orders</code> (via <code>PostgresHook</code>). Ne sautez pas d'étape — chaque task doit être validée individuellement avant de passer à la suivante.</li>
+<li><strong>Implémenter la transformation <code>staging → dwh</code></strong> avec le <strong>pattern idempotent obligatoire</strong> (DELETE + INSERT par partition <code>dt = {{ ds }}</code>).</li>
+<li><strong>Tester l'idempotence</strong> : rejouer 3 fois le même run et vérifier que <code>COUNT(*)</code> reste identique avec <code>psql</code>. C'est la preuve que votre pipeline est fiable.</li>
+</ol>
+<blockquote>
+<p>🟢 <strong>Objectif</strong> : pipeline principal qui tourne, idempotence prouvée, données visibles dans <code>dwh.fact_orders</code>. Premier commit Git poussé.</p>
+<p>🟠 <strong>Conseil</strong> : ne sous-estimez pas le temps de design du modèle dimensionnel et du Hook. Bâcler ces 2 étapes au début vous coûtera 2x plus de temps en debug ensuite.</p>
+<p>🟡 <strong>En cas de retard</strong> : sacrifiez le 2ème DAG (refresh dimensions). Concentrez-vous sur le pipeline principal de bout en bout.</p>
+</blockquote>
+<h3 id="112-jour-2-analytics-dashboards-observabilite">11.2 — Analytics, dashboards, observabilité</h3>
+<p>La deuxième partie est dédié à <strong>l'exposition des données</strong> via Metabase, à la qualité du livrable (tests, doc), et <strong>éventuellement</strong> à la stack d'observabilité Prometheus/Grafana en bonus.</p>
+<p><strong>Étapes recommandées dans l'ordre :</strong></p>
+<ol>
+<li><strong>Construire les tables d'agrégation</strong> dans le schéma <code>analytics</code>. Réfléchissez à ce qui est vraiment utile pour les dashboards : <code>daily_summary</code>, <code>seller_daily</code>, <code>category_daily</code>. Un DAG dédié peut s'en charger.</li>
+<li><strong>Ajouter Metabase au <code>docker-compose.yaml</code></strong> avec un <strong>volume nommé</strong> pour la persistance (sinon vous perdrez tout au prochain <code>docker compose down -v</code>).</li>
+<li><strong>Configurer la connexion Metabase → PostgreSQL DWH</strong>. Attention : le host est <code>postgres-dwh</code> (nom Docker), pas <code>localhost</code>, et le port interne est <code>5432</code>.</li>
+<li><strong>Créer les 2 dashboards minimum</strong> (Executive Summary + Top Sellers). Privilégiez la clarté à l'exhaustivité — un dashboard simple et lisible vaut mieux qu'un dashboard chargé.</li>
+<li><strong>Écrire les tests pytest</strong> (au moins 3) : import sans erreur, <code>catchup=False</code>, structure du DAG principal. Lancez-les via <code>docker compose exec airflow-worker pytest tests/ -v</code>.</li>
+<li><strong>Finaliser le README</strong> avec le schéma Mermaid de l'architecture, les instructions de lancement et les choix techniques justifiés.</li>
+<li><strong>Bonus si avance</strong> : ajouter Prometheus + Grafana + postgres-exporter (voir §13). Importer le dashboard Grafana ID 11010 (Airflow Cluster).</li>
+</ol>
+<blockquote>
+<p>🟢 <strong>Objectifs : </strong> : 2 dashboards Metabase fonctionnels, tests qui passent, README complet</p>
+<p>🟠 <strong>Conseil</strong> : commencez la doc et les tests <strong>en parallèle</strong> du code, pas à la fin. Un README à moitié écrit en cours de route est plus efficace qu'un README rédigé en panique à 16h59.</p>
+</blockquote>
+<hr />
+<h2 id="12-criteres-dacceptation">12. Critères d'acceptation</h2>
+<h3 id="121-definition-of-done">12.1 Definition of Done</h3>
+<p>Voir <a href="../Documentation commune.html">Documentation commune.html</a>, plus spécifique à ce projet :</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>marketplace_orders_ingest_daily</code> tourne en success</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>dwh.fact_orders</code> contient des données pour au moins 1 date</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Rejouer le même run 2 fois = même <code>COUNT(*)</code> dans <code>dwh.fact_orders</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Metabase affiche au moins 2 dashboards avec données réelles</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Au moins 3 tests pytest passent</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> README contient un schéma Mermaid et les instructions de lancement</li>
+</ul>
+<h3 id="122-tests-pytest-minimum">12.2 Tests pytest minimum</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_dags.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_no_import_errors</span><span class="p">(</span><span class="n">dagbag</span><span class="p">):</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_all_dags_catchup_false</span><span class="p">(</span><span class="n">dagbag</span><span class="p">):</span> <span class="o">...</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_marketplace_ingest_has_idempotent_transform</span><span class="p">(</span><span class="n">dagbag</span><span class="p">):</span> <span class="o">...</span>
+</code></pre></div>
+<h3 id="123-test-manuel-didempotence-que-le-formateur-executera">12.3 Test manuel d'idempotence (que le formateur exécutera)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run 1</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>airflow-worker<span class="w"> </span>airflow<span class="w"> </span>dags<span class="w"> </span><span class="nb">test</span><span class="w"> </span>marketplace_orders_ingest_daily<span class="w"> </span><span class="m">2026</span>-04-07
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres-dwh<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>dwh_user<span class="w"> </span>-d<span class="w"> </span>dwh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-c<span class="w"> </span><span class="s2">&quot;SELECT COUNT(*) FROM dwh.fact_orders WHERE dt=&#39;2026-04-07&#39;;&quot;</span>
+<span class="c1"># → N lignes</span>
+
+<span class="c1"># Run 2 (doit donner le meme COUNT)</span>
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>airflow-worker<span class="w"> </span>airflow<span class="w"> </span>dags<span class="w"> </span><span class="nb">test</span><span class="w"> </span>marketplace_orders_ingest_daily<span class="w"> </span><span class="m">2026</span>-04-07
+docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>postgres-dwh<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>dwh_user<span class="w"> </span>-d<span class="w"> </span>dwh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-c<span class="w"> </span><span class="s2">&quot;SELECT COUNT(*) FROM dwh.fact_orders WHERE dt=&#39;2026-04-07&#39;;&quot;</span>
+<span class="c1"># → toujours N lignes (PAS 2*N)</span>
+</code></pre></div>
+<hr />
+<h2 id="13-observabilite-bonus">13. Observabilité (bonus)</h2>
+<p>Si vous avez fini le MVP en avance, ajoutez la <strong>stack Prometheus + Grafana + exporters</strong>. C'est ce qui transforme un projet "ça marche sur ma machine" en projet "production-ready".</p>
+<h3 id="131-quoi-installer">13.1 Quoi installer</h3>
+<p>Voir <a href="../Documentation commune.html">Documentation commune.html</a> pour le docker-compose complet, la config Prometheus, et les commandes de vérification.</p>
+<p>Pour ce projet, les composants pertinents sont :</p>
+<ul>
+<li><strong><code>prometheus</code></strong> : scraper de métriques</li>
+<li><strong><code>grafana</code></strong> : dashboards (mapper sur <strong>port 3001</strong> car 3000 est pris par Metabase)</li>
+<li><strong><code>statsd-exporter</code></strong> : convertit les métriques StatsD d'Airflow en format Prometheus</li>
+<li><strong><code>postgres-exporter</code></strong> : métriques PostgreSQL (connexions, requêtes lentes, locks)</li>
+</ul>
+<h3 id="132-activer-les-metriques-airflow">13.2 Activer les métriques Airflow</h3>
+<p>Ajouter ces variables d'env dans <code>x-airflow-common</code> :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">AIRFLOW__METRICS__STATSD_ON</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;True&quot;</span>
+<span class="nt">AIRFLOW__METRICS__STATSD_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">statsd-exporter</span>
+<span class="nt">AIRFLOW__METRICS__STATSD_PORT</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;9125&quot;</span>
+<span class="nt">AIRFLOW__METRICS__STATSD_PREFIX</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airflow</span>
+</code></pre></div>
+<p>Puis <code>docker compose up -d --force-recreate</code>.</p>
+<h3 id="133-dashboards-grafana-a-importer">13.3 Dashboards Grafana à importer</h3>
+<p>Aller dans Grafana (<a href="http://localhost:3001">http://localhost:3001</a>, <code>admin/admin</code>) → <strong>Dashboards</strong> → <strong>Import</strong> → coller l'ID :</p>
+<table>
+<thead>
+<tr>
+<th>Dashboard</th>
+<th>ID</th>
+<th>Couvre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Airflow Cluster</td>
+<td><strong>11010</strong></td>
+<td>Métriques scheduler, tasks, DAGs</td>
+</tr>
+<tr>
+<td>PostgreSQL Database</td>
+<td><strong>9628</strong></td>
+<td>Connexions, requêtes, locks</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-grille-devaluation-100-pts">14. Grille d'évaluation (100 pts)</h2>
+<p>Voir <a href="../Documentation commune.html">Documentation commune.html</a>.</p>
+<p><strong>Spécifiques au projet A :</strong></p>
+<ul>
+<li>Les <strong>2 dashboards Metabase</strong> comptent pour 10 pts dans "Pipeline principal fonctionnel"</li>
+<li>Les <strong>dashboards supplémentaires</strong> (bonus Should) : +5 pts</li>
+<li>Le <strong>DAG d'anomaly detection</strong> (bonus Could) : +5 pts</li>
+<li>La <strong>stack observabilité Prometheus/Grafana</strong> (bonus Could) : +10 pts</li>
+</ul>
+<hr />
+<h2 id="15-pieges-specifiques-au-projet-a">15. Pièges spécifiques au projet A</h2>
+<h3 id="151-pieges-communs">15.1 Pièges communs</h3>
+<p>Voir <a href="../Documentation commune.html">Documentation commune.html</a>.</p>
+<h3 id="152-pieges-metabase">15.2 Pièges Metabase</h3>
+<table>
+<thead>
+<tr>
+<th>Piège</th>
+<th>Symptôme</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔴 Perte des dashboards au <code>down -v</code></td>
+<td>Tout disparaît</td>
+<td>Volume nommé <code>metabase-data</code> dans docker-compose</td>
+</tr>
+<tr>
+<td>🔴 Connexion à PostgreSQL wrong</td>
+<td>"Cannot connect"</td>
+<td>Host = <code>postgres-dwh</code> (nom Docker), port <strong>interne</strong> <code>5432</code></td>
+</tr>
+<tr>
+<td>🟡 Premier démarrage lent</td>
+<td>~60s de setup initial</td>
+<td>Normal, Metabase initialise sa DB H2</td>
+</tr>
+<tr>
+<td>🟡 Conflit de port avec Grafana</td>
+<td>"Bind failed" sur 3000</td>
+<td>Mapper Grafana sur <code>3001:3000</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="153-pieges-pipeline-elt">15.3 Pièges Pipeline ELT</h3>
+<table>
+<thead>
+<tr>
+<th>Piège</th>
+<th>Symptôme</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🔴 INSERT sans DELETE préalable</td>
+<td>Doublons à chaque run</td>
+<td>Utiliser le pattern <code>DELETE + INSERT</code> par partition <code>dt</code></td>
+</tr>
+<tr>
+<td>🔴 Date hardcodée dans le SQL</td>
+<td>Le run ignore <code>{{ ds }}</code></td>
+<td>Utiliser les <strong>macros Jinja</strong> Airflow (<code>{{ ds }}</code>, <code>{{ ds_nodash }}</code>)</td>
+</tr>
+<tr>
+<td>🔴 Token API en dur dans le code</td>
+<td>Détecté en code review</td>
+<td>Toujours via <code>Connection.password</code></td>
+</tr>
+<tr>
+<td>🟡 <code>staging.orders</code> qui grossit indéfiniment</td>
+<td>Disque qui se remplit</td>
+<td>Truncate / partition par <code>dt</code> à nettoyer périodiquement</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-ressources">16. Ressources</h2>
+<h3 id="161-documentation">16.1 Documentation</h3>
+<ul>
+<li>🔵 <a href="https://www.metabase.com/docs/latest/installation-and-operation/running-metabase-on-docker">Metabase Docker</a></li>
+<li>🔵 <a href="https://www.metabase.com/docs/latest/questions/native-editor/writing-sql">Metabase SQL Questions</a></li>
+<li>🔵 <a href="https://www.metabase.com/docs/latest/dashboards/introduction">Metabase Dashboards</a></li>
+<li>🔵 <a href="https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/_api/airflow/providers/postgres/hooks/postgres/index.html">Airflow PostgresHook</a></li>
+<li>🔵 <a href="https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/hooks/s3/index.html">Airflow S3Hook</a></li>
+<li>🔵 <a href="https://www.postgresql.org/docs/18/">PostgreSQL 18 Docs</a></li>
+</ul>
+<h3 id="162-bonnes-pratiques">16.2 Bonnes pratiques</h3>
+<ul>
+<li>🟠 <a href="https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/">Kimball Dimensional Modeling (intro)</a></li>
+<li>🟠 <a href="https://www.astronomer.io/docs/learn/dag-best-practices">Astronomer — DAG Best Practices</a></li>
+<li>🟠 <a href="https://airflow.apache.org/docs/apache-airflow/3.1.8/templates-ref.html">Airflow — Macros et Templates Jinja</a></li>
+</ul>
+<h3 id="163-outils-docker-debug">16.3 Outils Docker / debug</h3>
+<ul>
+<li>🟢 <a href="https://github.com/jesseduffield/lazydocker">lazydocker</a> — TUI pour Docker</li>
+<li>🟢 <a href="https://github.com/bcicen/ctop">ctop</a> — top pour containers</li>
+<li>🟢 <a href="https://www.pgcli.com/">pgcli</a> — client PostgreSQL avec autocomplétion</li>
+</ul>
+<h3 id="164-pour-aller-plus-loin">16.4 Pour aller plus loin</h3>
+<ul>
+<li>🟠 <a href="https://docs.getdbt.com/">dbt Core</a> — alternative à du SQL Airflow pour les transformations</li>
+<li>🟠 <a href="https://superset.apache.org/">Apache Superset</a> — alternative à Metabase, plus puissant mais plus complexe</li>
+<li>🟠 <a href="https://greatexpectations.io/">Great Expectations</a> — framework de data quality plus avancé que votre <code>DataQualityOperator</code></li>
+</ul>
+<hr />
+<h2 id="17-faq">17. FAQ</h2>
+<p><strong>Q : On peut utiliser Superset à la place de Metabase ?</strong>
+R : Oui, à vos risques. Superset est plus puissant mais plus complexe. Documentez le choix dans le README. Pas de pénalité, pas de bonus.</p>
+<p><strong>Q : On n'a pas le temps pour les 2 dashboards Metabase, on peut skipper ?</strong>
+R : Un seul dashboard avec 3 visualisations est acceptable comme MVP minimal. Mais c'est risqué — ça pèsera sur la note.</p>
+<p><strong>Q : Le DataQualityOperator est-il obligatoire ?</strong>
+R : Non, c'est un bonus (Should). Concentrez-vous sur le MVP d'abord.</p>
+<p><strong>Q : On peut ajouter dbt pour les transformations ?</strong>
+R : Hors scope pour 14h. Mentionnez-le dans le README comme "ce qu'on ferait avec plus de temps".</p>
+<p><strong>Q : Le bonus observabilité (Prometheus/Grafana) est-il vraiment réaliste en 14h ?</strong>
+R : Si le MVP est fini à 14h le J2, oui : ~2h pour ajouter la stack et importer le dashboard 11010. Si vous galérez sur le MVP, <strong>n'y allez pas</strong>.</p>
+<p><strong>Q : Comment on accède à PostgreSQL DWH depuis l'extérieur du conteneur ?</strong>
+R : Le port <code>5433</code> est exposé sur l'hôte. Depuis votre machine : <code>psql -h localhost -p 5433 -U dwh_user -d dwh</code>. Depuis un autre conteneur : <code>psql -h postgres-dwh -p 5432 ...</code>.</p>
+<p><strong>Q : Que faire si MinIO n'a pas créé le bucket ?</strong>
+R : Aller dans MinIO Console (<a href="http://localhost:9001">http://localhost:9001</a>, login <code>minio_admin</code> / <code>minio_password_2026</code>) et créer manuellement le bucket <code>data-lake</code>. Ou exécuter <code>docker compose restart minio-init</code>.</p>
+<hr />
+<p>🟢 <strong>Objectif final : un pipeline simple qui tourne, idempotent, avec 2 dashboards Metabase lisibles.</strong></p>
+    </article>
+
+    
+    
+    
+    <script>
+    (function() {
+        'use strict';
+        
+        function initMermaidLightbox() {
+            // Crée le conteneur lightbox
+            const lightbox = document.createElement('div');
+            lightbox.className = 'mermaid-lightbox';
+            lightbox.innerHTML = `
+                <div class="mermaid-lightbox-backdrop"></div>
+                <div class="mermaid-lightbox-container">
+                    <div class="mermaid-lightbox-content"></div>
+                </div>
+                <div class="mermaid-lightbox-controls">
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-in" title="Zoom +">+</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-reset" title="Reset">100%</button>
+                    <button class="mermaid-lb-btn mermaid-lb-zoom-out" title="Zoom -">−</button>
+                    <button class="mermaid-lb-btn mermaid-lb-close" title="Fermer">✕</button>
+                </div>
+            `;
+            document.body.appendChild(lightbox);
+
+            // Variables de zoom et pan
+            let scale = 1;
+            let translateX = 0;
+            let translateY = 0;
+            let isDragging = false;
+            let startX, startY;
+
+            const container = lightbox.querySelector('.mermaid-lightbox-container');
+            const content = lightbox.querySelector('.mermaid-lightbox-content');
+            const backdrop = lightbox.querySelector('.mermaid-lightbox-backdrop');
+
+            // Ajoute un bouton d'expansion à chaque diagramme Mermaid
+            document.querySelectorAll('.mermaid, pre.mermaid').forEach(diagram => {
+                const expandBtn = document.createElement('button');
+                expandBtn.className = 'mermaid-expand-btn';
+                expandBtn.innerHTML = '⛶';
+                expandBtn.title = 'Agrandir le diagramme';
+                expandBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openLightbox(diagram);
+                });
+                
+                // Wrapper pour positionner le bouton
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mermaid-wrapper';
+                diagram.parentNode.insertBefore(wrapper, diagram);
+                wrapper.appendChild(diagram);
+                wrapper.appendChild(expandBtn);
+            });
+
+            function openLightbox(diagram) {
+                // Clone le contenu SVG
+                const svg = diagram.querySelector('svg');
+                if (svg) {
+                    content.innerHTML = '';
+                    const clonedSvg = svg.cloneNode(true);
+                    
+                    // Garder le viewBox pour les proportions
+                    if (!clonedSvg.hasAttribute('viewBox') && svg.viewBox && svg.viewBox.baseVal) {
+                        const vb = svg.viewBox.baseVal;
+                        if (vb.width && vb.height) {
+                            clonedSvg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+                        }
+                    }
+                    
+                    // Le CSS gère les dimensions (80vw)
+                    clonedSvg.removeAttribute('width');
+                    clonedSvg.removeAttribute('height');
+                    
+                    // Agrandir les foreignObject pour éviter la troncature du texte
+                    clonedSvg.querySelectorAll('foreignObject').forEach(fo => {
+                        const currentWidth = parseFloat(fo.getAttribute('width')) || 100;
+                        const currentHeight = parseFloat(fo.getAttribute('height')) || 50;
+                        fo.setAttribute('width', currentWidth * 1.5);
+                        fo.setAttribute('height', currentHeight * 1.5);
+                    });
+                    
+                    content.appendChild(clonedSvg);
+                } else {
+                    content.innerHTML = diagram.innerHTML;
+                }
+                
+                // Reset zoom et position
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+                
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function applyTransform() {
+                content.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                lightbox.querySelector('.mermaid-lb-zoom-reset').textContent = Math.round(scale * 100) + '%';
+            }
+
+            function zoomIn() {
+                scale = Math.min(scale * 1.25, 5);
+                applyTransform();
+            }
+
+            function zoomOut() {
+                scale = Math.max(scale / 1.25, 0.25);
+                applyTransform();
+            }
+
+            function zoomReset() {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+            }
+
+            // Événements des boutons
+            lightbox.querySelector('.mermaid-lb-close').addEventListener('click', closeLightbox);
+            lightbox.querySelector('.mermaid-lb-zoom-in').addEventListener('click', zoomIn);
+            lightbox.querySelector('.mermaid-lb-zoom-out').addEventListener('click', zoomOut);
+            lightbox.querySelector('.mermaid-lb-zoom-reset').addEventListener('click', zoomReset);
+            backdrop.addEventListener('click', closeLightbox);
+
+            // Fermer avec Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Zoom avec la molette
+            container.addEventListener('wheel', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                e.preventDefault();
+                
+                if (e.deltaY < 0) {
+                    scale = Math.min(scale * 1.1, 5);
+                } else {
+                    scale = Math.max(scale / 1.1, 0.25);
+                }
+                applyTransform();
+            });
+
+            // Pan avec la souris
+            container.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                container.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                applyTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                container.style.cursor = 'grab';
+            });
+
+            // Touch support pour mobile
+            let touchStartX, touchStartY;
+            container.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    touchStartX = e.touches[0].clientX - translateX;
+                    touchStartY = e.touches[0].clientY - translateY;
+                }
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    translateX = e.touches[0].clientX - touchStartX;
+                    translateY = e.touches[0].clientY - touchStartY;
+                    applyTransform();
+                }
+            });
+        }
+
+        // Initialise après le rendu de Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                setTimeout(initMermaidLightbox, 600);
+            } else {
+                initMermaidLightbox();
+            }
+        });
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+# =============================================================================
+# MarketPlace Analytics - stack complète
+#   docker compose up -d --build                       -> MVP (Airflow, MinIO, DWH, API, Metabase)
+#   docker compose --profile monitoring up -d          -> + Prometheus / Grafana / postgres-exporter 
+# =============================================================================
+
+x-airflow-common: &airflow-common
+  build: ./airflow
+  image: marketplace-airflow:3.1.8
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres-airflow/airflow
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres-airflow/airflow
+    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:-}
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
+    # Secret partagé par tous les composants (sinon : "Invalid auth token" entre worker et api-server)
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:-change-me-marketplace-jwt-secret-2026-must-be-at-least-64-bytes-long-ok}
+    AIRFLOW__API__SECRET_KEY: ${AIRFLOW_JWT_SECRET:-change-me-marketplace-jwt-secret-2026-must-be-at-least-64-bytes-long-ok}
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: "true"
+    # @daily traite la journée qui vient de se terminer ({{ ds }} = J-1), comme en Airflow 2.
+    AIRFLOW__SCHEDULER__CREATE_CRON_DATA_INTERVALS: "true"
+    # Détection des nouveaux fichiers DAG en 30 s au lieu de 5 min.
+    AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL: "30"
+    # --- Connections (le token n'est JAMAIS dans le code des DAGs)
+    AIRFLOW_CONN_MARKETPLACE_API: >-
+      {"conn_type": "http", "host": "http://api-marketplace:5000",
+       "password": "${MARKETPLACE_API_TOKEN:-formation-token-2026}"}
+    AIRFLOW_CONN_POSTGRES_DWH: >-
+      {"conn_type": "postgres", "host": "postgres-dwh", "port": 5432,
+       "login": "${DWH_USER:-dwh_user}", "password": "${DWH_PASSWORD:-dwh_password_2026}",
+       "schema": "${DWH_DB:-dwh}"}
+    AIRFLOW_CONN_MINIO_S3: >-
+      {"conn_type": "aws", "login": "${MINIO_ROOT_USER:-minio_admin}",
+       "password": "${MINIO_ROOT_PASSWORD:-minio_password_2026}",
+       "extra": {"endpoint_url": "http://minio:9000", "region_name": "us-east-1"}}
+    # --- Métriques StatsD -> statsd-exporter -> Prometheus (bonus observabilité)
+    AIRFLOW__METRICS__STATSD_ON: "true"
+    AIRFLOW__METRICS__STATSD_HOST: statsd-exporter
+    AIRFLOW__METRICS__STATSD_PORT: "9125"
+    AIRFLOW__METRICS__STATSD_PREFIX: airflow
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./plugins:/opt/airflow/plugins
+    - ./logs:/opt/airflow/logs
+    - ./tests:/opt/airflow/tests
+    - ./api:/opt/airflow/api:ro
+  user: "${AIRFLOW_UID:-50000}:0"
+  depends_on: &airflow-common-depends-on
+    redis:
+      condition: service_healthy
+    postgres-airflow:
+      condition: service_healthy
+    statsd-exporter:
+      condition: service_started
+
+services:
+  # ------------------------------------------------------------------ Airflow
+  postgres-airflow:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - pg-airflow-data:/var/lib/postgresql   # PG 18 : monter le parent de PGDATA
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  redis:
+    image: redis:7.2-bookworm
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 30s
+      retries: 50
+      start_period: 30s
+    restart: always
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /opt/airflow/logs /opt/airflow/dags /opt/airflow/plugins
+        chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/logs
+        exec /entrypoint airflow version
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_MIGRATE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: ${AIRFLOW_ADMIN_USER:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD:-airflow}
+    user: "0:0"
+
+  airflow-apiserver:
+    <<: *airflow-common
+    command: api-server
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8974/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type DagProcessorJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-worker:
+    <<: *airflow-common
+    command: celery worker
+    healthcheck:
+      test: ["CMD-SHELL", 'celery --app airflow.providers.celery.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}" || celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    environment:
+      <<: *airflow-common-env
+      DUMB_INIT_SETSID: "0"
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-apiserver:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-triggerer:
+    <<: *airflow-common
+    command: triggerer
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  # ------------------------------------------------------------------ Données
+  postgres-dwh:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: ${DWH_USER:-dwh_user}
+      POSTGRES_PASSWORD: ${DWH_PASSWORD:-dwh_password_2026}
+      POSTGRES_DB: ${DWH_DB:-dwh}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg-dwh-data:/var/lib/postgresql
+      - ./init-db:/docker-entrypoint-initdb.d:ro   # schema.sql joué au 1er démarrage
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  # Les images minio/minio et minio/mc ont été retirées de Docker Hub fin 2025 :
+  # on utilise le même serveur MinIO (RELEASE.2025-04-22) empaqueté par Bitnami,
+  # qui embarque aussi le client mc.
+  minio:
+    image: bitnamilegacy/minio:2025.4.22
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_password_2026}
+      MINIO_CONSOLE_PORT_NUMBER: "9001"
+    ports:
+      - "9000:9000"   # API S3
+      - "9001:9001"   # console web
+    volumes:
+      - minio-data:/bitnami/minio/data
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  minio-init:
+    image: bitnamilegacy/minio:2025.4.22
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - |
+        mc alias set local http://minio:9000 "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}" &&
+        mc mb --ignore-existing local/data-lake &&
+        echo "bucket data-lake prêt"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minio_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_password_2026}
+      MC_CONFIG_DIR: /tmp/.mc
+    restart: "no"
+
+  api-marketplace:
+    build: ./api
+    image: marketplace-api:1.0.0
+    environment:
+      API_TOKEN: ${MARKETPLACE_API_TOKEN:-formation-token-2026}
+      API_FAILURE_RATE: ${API_FAILURE_RATE:-0}
+    ports:
+      - "5000:5000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: always
+
+  # ------------------------------------------------------------------ BI
+  metabase:
+    image: metabase/metabase:v0.59.6.1
+    ports:
+      - "3000:3000"
+    environment:
+      MB_DB_TYPE: h2
+      MB_DB_FILE: /metabase-data/metabase.db
+      JAVA_OPTS: -Xmx1g
+    volumes:
+      - metabase-data:/metabase-data   # CRUCIAL : persistance des dashboards
+    depends_on:
+      - postgres-dwh
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail http://localhost:3000/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    restart: always
+
+  # ------------------------------------------------------------------ Observabilité
+  # Léger, toujours démarré : Airflow lui envoie ses métriques StatsD (UDP).
+  statsd-exporter:
+    image: prom/statsd-exporter:v0.28.0
+    command: ["--statsd.mapping-config=/etc/statsd/mapping.yml"]
+    volumes:
+      - ./monitoring/statsd_mapping.yml:/etc/statsd/mapping.yml:ro
+    ports:
+      - "9102:9102"
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    profiles: ["monitoring"]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:12.1.0
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    ports:
+      - "3001:3000"   # 3000 est pris par Metabase
+    depends_on:
+      - prometheus
+    restart: always
+
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter:v0.17.1
+    profiles: ["monitoring"]
+    environment:
+      DATA_SOURCE_URI: postgres-dwh:5432/${DWH_DB:-dwh}?sslmode=disable
+      DATA_SOURCE_USER: ${DWH_USER:-dwh_user}
+      DATA_SOURCE_PASS: ${DWH_PASSWORD:-dwh_password_2026}
+    ports:
+      - "9187:9187"
+    depends_on:
+      - postgres-dwh
+    restart: always
+
+volumes:
+  pg-airflow-data:
+  pg-dwh-data:
+  minio-data:
+  metabase-data:
+  prometheus-data:
+  grafana-data:
